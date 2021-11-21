@@ -1,0 +1,20 @@
+header, main, footer {
+    padding-left: 300px;
+  }
+
+  @media only screen and (max-width : 992px) {
+    header, main, footer {
+      padding-left: 0;
+    }
+  }
+
+.nav-style{
+  height: 90px;
+  background-color:transparent;
+}
+
+
+nav .sidenav-trigger i {
+    padding-top: 15px;
+    color:royalblue;
+}

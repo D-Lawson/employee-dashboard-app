@@ -6,18 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
     <title>Employee Dashboard</title>
 </head>
 
 <body>
     <header>
-        <nav>
-            <ul id="slide-out" class="sidenav sidenav-fixed">
-
-            </ul>
-            
+        <nav class="nav-style">
+            <div class="container"><a href="#" class="sidenav-trigger full hide-on-large-only" data-target="sidenav-mobile"><i class="material-icons">menu</i></a>
+            </div>
         </nav>
+
+        <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
+            <li><div class="user-view">
+                <div class="background">
+                  <img src="images/sidenav-bg.jpg">
+                </div>
+                </li>
+              <li><a href="#!"><i class="material-icons">check</i>Test link 1</a></li>
+              <li><div class="divider"></div></li>
+              <li><a href="#!" class="waves-effect">Test link 2</a></li>
+              <li><a href="#!" class="waves-effect">Test link 3</a></li>
+              <li><a class="waves-effect" href="#!">Test link 4</a></li>
+        </ul>
 </header>
         <main class="container">
 
