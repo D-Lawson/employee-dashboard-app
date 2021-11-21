@@ -9,12 +9,29 @@ header, main, footer {
   }
 
 .nav-style{
-  height: 90px;
   background-color:transparent;
 }
 
+.menu-position{
+    bottom: 15px;
 
+}
 nav .sidenav-trigger i {
-    padding-top: 15px;
+
     color:royalblue;
+}
+
+.sidenav{
+    background-color: #484848;
+}
+
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
+    -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 0 0 0 rgb(0 0 0 / 20%);
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 0 0 0 rgb(0 0 0 / 20%);
+}
+
+.header-text{
+        font-size: 2rem;
+        line-height: 110%;
+        margin-left: 40px;
 }

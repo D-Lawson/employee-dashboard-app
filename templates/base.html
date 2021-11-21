@@ -14,32 +14,40 @@
 <body>
     <header>
         <nav class="nav-style">
-            <div class="container"><a href="#" class="sidenav-trigger full hide-on-large-only" data-target="sidenav-mobile"><i class="material-icons">menu</i></a>
+            <div class="container"><a href="#" class="menu-position sidenav-trigger full hide-on-large-only"
+                    data-target="sidenav-mobile"><i class="material-icons">menu</i></a>
+            </div>
+
+            <div class="col s12 m10">
+                <h1 class="header black-text header-text">Please log in to your dashboard</h1>
+
             </div>
         </nav>
-
         <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
-            <li><div class="user-view">
-                <div class="background">
-                  <img src="images/sidenav-bg.jpg">
+            <li>
+                <div class="user-view">
+                    <a href="#user"><img class="circle" src="static/images/sidenav-bg.jpg"></a>
+                    <a href="#name"><span class="white-text name">User Name</span></a>
+                    <a href="#email"><span class="white-text email">user@email.com</span></a>
                 </div>
-                </li>
-              <li><a href="#!"><i class="material-icons">check</i>Test link 1</a></li>
-              <li><div class="divider"></div></li>
-              <li><a href="#!" class="waves-effect">Test link 2</a></li>
-              <li><a href="#!" class="waves-effect">Test link 3</a></li>
-              <li><a class="waves-effect" href="#!">Test link 4</a></li>
+            </li>
+            <li><a class="white-text" href="#!"><i class="white-text material-icons">vpn_key</i>Log in</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
+
         </ul>
-</header>
-        <main class="container">
+    </header>
+    <main class="container">
 
-        </main>
+    </main>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>
 
 </html>
