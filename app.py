@@ -28,8 +28,17 @@ def login():
     if request.method == "POST":
         check_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
+        current_username = request.form.get("username").lower()
 
-        if check_user:
+        if check_user and current_username == "admin":
+            if check_password_hash(
+                    check_user["password"], request.form.get("password")):
+                        session["user"] = request.form.get("username").lower()
+                        flash("Hello {}, you are signed in to your Admin dashboard".format(
+                            request.form.get("username")))
+                        return redirect(url_for(
+                            "admin_dashboard", username=session["user"]))
+        elif check_user and current_username != "admin":
             if check_password_hash(
                     check_user["password"], request.form.get("password")):
                         session["user"] = request.form.get("username").lower()
@@ -78,6 +87,10 @@ def logout():
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
+
+@app.route("/admin_dashboard")
+def admin_dashboard():
+    return render_template("admin_dashboard.html")
 
 
 if __name__ == "__main__":
