@@ -8,8 +8,9 @@ h1, h2, h3, h4, h5{
   font-family: 'Raleway', sans-serif;
 }
 
-.top-margin-70{
+.heading-top-bottom{
   margin-top: 70px;
+  margin-bottom: 45px;
 }
 
 header, main, footer {
@@ -70,5 +71,20 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+
+.form-width{
+  width: 60%;
+}
+
+.margin-left-right{
+  margin-left: 5px;
 }
 

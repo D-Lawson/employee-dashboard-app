@@ -25,6 +25,25 @@ mongo = PyMongo(app)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        check_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if check_user:
+            if check_password_hash(
+                    check_user["password"], request.form.get("password")):
+                        session["user"] = request.form.get("username").lower()
+                        flash("Hello {}, you are signed in to your personal dashboard".format(
+                            request.form.get("username")))
+                        return redirect(url_for(
+                            "dashboard", username=session["user"]))
+            else:
+                flash("The Password and/or Username is incorrect.  Please try again.")
+                return redirect(url_for("login"))
+
+        else:
+            flash("The Password and/or Username is incorrect.  Please try again.")
+            return redirect(url_for("login"))
     return render_template("login.html")
 
 
@@ -45,7 +64,7 @@ def register():
         mongo.db.users.insert_one(create_user)
 
         session["user"] = request.form.get("username").lower()
-        flash("Thank you for registering.  Welcome to your personal dashboard.")
+        flash("Thank you for registering.  Your are now signed in to your personal dashboard.")
         return redirect(url_for("dashboard", username=session["user"]))
 
     return render_template("register.html")
