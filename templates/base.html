@@ -22,25 +22,41 @@
                 <h5 class="header black-text header-text hide-on-large-only">Employee Dashboard</h5>
 
             </div>
-        </nav>
-        <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
-            <li>
-                <div class="user-view">
-                    <img class="circle" src="static/images/metal-textures.jpg"></a>
-                    <span class="logo-style">Employee Dashboard</span>
-                </div>
-            </li>
-            <li><a class="white-text" href="{{ url_for('login') }}"><i class="white-text material-icons">vpn_key</i>Log
-                    in</a></li>
-            <li>
-                <div class="divider"></div>
-            </li>
-            <li><a class="white-text" href="{{ url_for('register') }}">Register</a></li>
-            <li><a class="white-text" href="">Log out</a></li>
-            <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
+            <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
+                <li>
+                    <div class="user-view">
+                        <img class="circle" src="static/images/metal-textures.jpg"></a>
+                        <span class="logo-style">Employee Dashboard</span>
+                    </div>
+                </li>
+                <li><a class="white-text" href="{{ url_for('login') }}"><i
+                            class="white-text material-icons">vpn_key</i>Log
+                        in</a></li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li><a class="white-text" href="{{ url_for('register') }}">Register</a></li>
+                <li><a class="white-text" href="{{ url_for('logout') }}">Log out</a></li>
+                <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
 
-        </ul>
+            </ul>
+        </nav>
+
     </header>
+
+    <section>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div style="padding-left: 300px;" class="row flashes">
+            <h5 class="lime lighten-3 black-text center-align">{{ message }}</h5>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+    </section>
 
     <main class="container">
         {% block content %}
