@@ -19,26 +19,29 @@
             </div>
 
             <div class="col s12 m10">
-                <h1 class="header black-text header-text">Please log in to your dashboard</h1>
+                <h5 class="header black-text header-text hide-on-large-only">Employee Dashboard</h5>
 
             </div>
         </nav>
         <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
             <li>
                 <div class="user-view">
-                    <a href="#user"><img class="circle" src="static/images/sidenav-bg.jpg"></a>
-                    <a href="#name"><span class="white-text name">User Name</span></a>
-                    <a href="#email"><span class="white-text email">user@email.com</span></a>
+                    <img class="circle" src="static/images/metal-textures.jpg"></a>
+                    <span class="logo-style">Employee Dashboard</span>
                 </div>
             </li>
-            <li><a class="white-text" href="#!"><i class="white-text material-icons">vpn_key</i>Log in</a></li>
+            <li><a class="white-text" href="{{ url_for('login') }}"><i class="white-text material-icons">vpn_key</i>Log
+                    in</a></li>
             <li>
                 <div class="divider"></div>
             </li>
+            <li><a class="white-text" href="{{ url_for('register') }}">Register</a></li>
+            <li><a class="white-text" href="">Log out</a></li>
             <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
 
         </ul>
     </header>
+
     <main class="container">
         {% block content %}
         {% endblock %}

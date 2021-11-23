@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+body{
+  background-color: #fbfbfd;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: 'Raleway', sans-serif;
+}
+
+.top-margin-70{
+  margin-top: 70px;
+}
+
 header, main, footer {
     padding-left: 300px;
   }
@@ -18,7 +32,7 @@ header, main, footer {
 }
 nav .sidenav-trigger i {
 
-    color:royalblue;
+    color: #333333;
 }
 
 .sidenav{
@@ -33,5 +47,21 @@ nav .sidenav-trigger i {
 .header-text{
         font-size: 2rem;
         line-height: 110%;
-        margin-left: 40px;
+        margin-left: 50px;
 }
+
+.submit-fill{
+  background-color: #4caf50;
+
+}
+
+.logo-style{
+  position: relative;
+  bottom: 56px;
+  left: 23px;
+  font-size: 22px;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  font-family: 'Raleway';
+  color: azure;
+}
+

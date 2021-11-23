@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h4 class="center-align top-margin-70">Register</h4>
+
+<div class="row">
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
+        <div class="form-style">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="username" name="username" type="text" class="validate" required>
+                    <label class="black-text" for="username">Username</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" name="password" type="password" class="validate" required>
+                    <label class="black-text" for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit"
+                    class="col s12 m6 offset-m3 center-align btn waves-effect waves-light submit-fill text-shadow">
+                    Register<i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <p class="center-align">
+            Alternatively,
+            <a href="{{ url_for('login') }}" class="red-text">Log In</a> here.
+        </p>
+    </div>
+</div>
+
+{% endblock %}
