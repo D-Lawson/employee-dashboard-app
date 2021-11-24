@@ -42,8 +42,6 @@ def login():
             if check_password_hash(
                     check_user["password"], request.form.get("password")):
                         session["user"] = request.form.get("username").lower()
-                        flash("Hello {}, you are signed in to your personal dashboard".format(
-                            request.form.get("username")))
                         return redirect(url_for(
                             "dashboard", username=session["user"]))
             else:
@@ -84,9 +82,19 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dashboard.html")
+
+@app.route("/dashboard/<username>", methods=["GET", "POST"])
+def dashboard(username):
+    activities = list(mongo.db.activities.find({"username": session["user"]}))
+
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if session["user"]:
+        return render_template("dashboard.html", activities=activities, username=username)
+
+    return redirect(url_for("login"))
+
 
 @app.route("/admin_dashboard", methods=["GET", "POST"])
 def admin_dashboard():
