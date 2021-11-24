@@ -108,9 +108,11 @@ def admin_dashboard():
         mongo.db.activities.insert_one(task)
         flash("Activity successfully assigned to user")
         return redirect(url_for("admin_dashboard"))
+    
+    activities = list(mongo.db.activities.find())
 
     users = mongo.db.users.find().sort("username", 1)
-    return render_template("admin_dashboard.html", users=users)
+    return render_template("admin_dashboard.html", users=users, activities=activities)
 
 
 if __name__ == "__main__":

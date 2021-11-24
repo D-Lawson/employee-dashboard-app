@@ -51,5 +51,21 @@
     </form>
 </div>
 
+{% if activities|length > 0 %}
+  {% for activity in activities %}
+  <div class="row">
+    <ul class="col collapsible s12 heading-top no-margin">
+      <li>
+        <div class="collapsible-header"><i
+            class="material-icons">schedule</i><strong>{{ activity.activity_name }}</strong><span class="right-align">Assigned to: {{ activity.username }}</span></div>
+        <div class="collapsible-body"><span><strong>{{ activity.activity_description }}</strong></span></div>
+      </li>
+    </ul>
+  </div>
+  {% endfor %}
+{% else %}
+<h3 class="center-align">You currently have no activities assigned</h3>
+{% endif %}
+
 
 {% endblock %}
