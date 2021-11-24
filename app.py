@@ -88,8 +88,18 @@ def logout():
 def dashboard():
     return render_template("dashboard.html")
 
-@app.route("/admin_dashboard")
+@app.route("/admin_dashboard", methods=["GET", "POST"])
 def admin_dashboard():
+    if request.method == "POST":
+        task = {
+            "username": request.form.get("assign_to"),
+            "activity_name": request.form.get("activity_name"),
+            "activity_description": request.form.get("activity_description"),
+            "target_date": request.form.get("target_date"),
+        }
+        mongo.db.activities.insert_one(task)
+        flash("Activity successfully assigned to user")
+        return redirect(url_for("admin_dashboard"))
 
     users = mongo.db.users.find().sort("username", 1)
     return render_template("admin_dashboard.html", users=users)
