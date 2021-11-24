@@ -90,7 +90,9 @@ def dashboard():
 
 @app.route("/admin_dashboard")
 def admin_dashboard():
-    return render_template("admin_dashboard.html")
+
+    users = mongo.db.users.find().sort("username", 1)
+    return render_template("admin_dashboard.html", users=users)
 
 
 if __name__ == "__main__":
