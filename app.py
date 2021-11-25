@@ -76,6 +76,7 @@ def register():
 
     return render_template("register.html")
 
+
 @app.route("/logout")
 def logout():
     flash("Sucessfully logged out from dashboard")
@@ -113,6 +114,24 @@ def admin_dashboard():
 
     users = mongo.db.users.find().sort("username", 1)
     return render_template("admin_dashboard.html", users=users, activities=activities)
+
+
+@app.route("/edit_activity/<activity_id>", methods=["GET", "POST"])
+def edit_activity(activity_id):
+    if request.method == "POST":
+        update = {
+            "username": request.form.get("assign_to"),
+            "activity_name": request.form.get("activity_name"),
+            "activity_description": request.form.get("activity_description"),
+            "target_date": request.form.get("target_date"),
+        }
+        mongo.db.activities.update({"_id": ObjectId(activity_id)}, update)
+        flash("Activity successfully updated")
+        return redirect(url_for("admin_dashboard"))
+    activity = mongo.db.activities.find_one({"_id": ObjectId(activity_id)})
+    users = mongo.db.users.find().sort("username", 1)
+
+    return render_template("edit_activity.html", activity=activity, users=users)
 
 
 if __name__ == "__main__":
