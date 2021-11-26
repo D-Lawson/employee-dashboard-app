@@ -5,6 +5,8 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+import time
+from datetime import datetime
 if os.path.exists("env.py"):
     import env
 
@@ -100,17 +102,23 @@ def dashboard(username):
 @app.route("/admin_dashboard", methods=["GET", "POST"])
 def admin_dashboard():
     if request.method == "POST":
-        task = {
+        datestring = request.form.get("target_date")
+        unixdate = datetime.strptime(datestring, "%d %B, %Y").date()
+        unixtime = datetime.now().time()
+        combine = datetime.combine(unixdate, unixtime)
+        print(combine)
+        activity = {
             "username": request.form.get("assign_to"),
             "activity_name": request.form.get("activity_name"),
             "activity_description": request.form.get("activity_description"),
-            "target_date": request.form.get("target_date"),
+            "target_date": combine,
         }
-        mongo.db.activities.insert_one(task)
+        mongo.db.activities.insert_one(activity)
         flash("Activity successfully assigned to user")
         return redirect(url_for("admin_dashboard"))
     
-    activities = list(mongo.db.activities.find())
+    activities = list(mongo.db.activities.find().sort("target_date", 1))
+
 
     users = mongo.db.users.find().sort("username", 1)
     return render_template("admin_dashboard.html", users=users, activities=activities)
@@ -119,11 +127,17 @@ def admin_dashboard():
 @app.route("/edit_activity/<activity_id>", methods=["GET", "POST"])
 def edit_activity(activity_id):
     if request.method == "POST":
+        datestring = request.form.get("target_date")
+        unixdate = datetime.strptime(datestring, "%d %B, %Y").date()
+        unixtime = datetime.now().time()
+        combine = datetime.combine(unixdate, unixtime)
+        print(combine)
         update = {
             "username": request.form.get("assign_to"),
             "activity_name": request.form.get("activity_name"),
             "activity_description": request.form.get("activity_description"),
-            "target_date": request.form.get("target_date"),
+            "target_date": combine,
+            "date_string": datestring,
         }
         mongo.db.activities.update({"_id": ObjectId(activity_id)}, update)
         flash("Activity successfully updated")

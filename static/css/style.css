@@ -97,3 +97,7 @@ input:-webkit-autofill:active{
   margin-bottom: 0;
 }
 
+.activity-margin{
+  margin-left: 7px;
+  margin-right: 7px;
+}

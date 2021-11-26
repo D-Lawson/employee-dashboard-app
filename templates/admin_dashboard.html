@@ -58,8 +58,9 @@
       <li>
         <div class="collapsible-header">
             <a href="{{ url_for('edit_activity', activity_id=activity._id) }}" class="btn-small red lighten-1">Edit</a>
-            <i class="material-icons">schedule</i><strong>{{ activity.activity_name }}
-            </strong><span class="right-align">Assigned to: {{ activity.username }}</span>
+            <i class="material-icons">schedule</i><strong>{{ activity.activity_name }}</strong>
+            <span class="right-align activity-margin">Assigned to: {{ activity.username }}</span>
+            <span class="right-align activity-margin">Due by: {{ activity.date_string }}</span>
         </div>
         <div class="collapsible-body"><span><strong>{{ activity.activity_description }}</strong></span></div>
       </li>
