@@ -88,6 +88,7 @@ def logout():
 
 @app.route("/dashboard/<username>", methods=["GET", "POST"])
 def dashboard(username):
+
     activities = list(mongo.db.activities.find({"username": session["user"]}))
 
     username = mongo.db.users.find_one(

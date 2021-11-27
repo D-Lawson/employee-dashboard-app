@@ -8,8 +8,11 @@
   <div class="row">
     <ul class="col collapsible s12 heading-top no-margin">
       <li>
-        <div class="collapsible-header"><i
-            class="material-icons">schedule</i><strong>{{ activity.activity_name }}</strong></div>
+        <div class="collapsible-header">
+          <i id="conditional-bg-{{ loop.index }}" class="material-icons">schedule</i><strong>{{ activity.activity_name }}</strong>
+          <span class="right-align activity-margin">Due by: {{ activity.date_string }}</span>
+          <span id="date-target-{{ loop.index }}" class="hide">{{ activity.target_date }}</span>
+        </div>
         <div class="collapsible-body"><span><strong>{{ activity.activity_description }}</strong></span></div>
       </li>
     </ul>
