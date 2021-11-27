@@ -2,7 +2,9 @@
 
 body{
   background-color: #fbfbfd;
+  overflow-x: hidden;
 }
+
 
 h1, h2, h3, h4, h5{
   font-family: 'Raleway', sans-serif;
@@ -100,4 +102,67 @@ input:-webkit-autofill:active{
 .activity-margin{
   margin-left: 7px;
   margin-right: 7px;
+}
+
+.collapsible-header{
+  position: relative !important;
+  height: 60px;
+  
+}
+
+.assigned-to {
+  float: right;
+  position: absolute;
+  right: 0;
+  bottom: 32px;
+  white-space: nowrap;
+}
+
+.due-by {
+  float: right;
+  position: absolute;
+  right: 0;
+  bottom: 7px;
+  white-space: nowrap;
+}
+
+.activity-name {
+  float: left;
+  position: absolute;
+  left: 110px;
+  bottom: 20px;
+}
+
+@media (max-width: 992px) {
+  .activity-name {
+    float: left;
+    position: absolute;
+    left: 37px;
+    bottom: 20px;
+  }
+}
+
+.edit {
+  float: left;
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  white-space: nowrap;
+}
+
+.time-icon {
+  float: left;
+  position: absolute;
+  left: 67px;
+  bottom: 19px;
+  white-space: nowrap;
+}
+
+@media (max-width: 992px) {
+  .time-icon {
+    float: left;
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+  }
 }
