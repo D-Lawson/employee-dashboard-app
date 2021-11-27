@@ -150,6 +150,17 @@ input:-webkit-autofill:active{
   white-space: nowrap;
 }
 
+@media (max-width: 992px) {
+  .edit{
+      position: relative;
+      bottom: auto;
+      margin-right: 10px;
+      display: inline-block;
+      left: 0;
+      white-space: nowrap;
+  }
+  }
+
 .time-icon {
   float: left;
   position: absolute;
