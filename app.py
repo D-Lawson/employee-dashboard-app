@@ -89,7 +89,7 @@ def logout():
 @app.route("/dashboard/<username>", methods=["GET", "POST"])
 def dashboard(username):
 
-    activities = list(mongo.db.activities.find({"username": session["user"]}))
+    activities = list(mongo.db.activities.find({"username": session["user"],"completed":"no"}).sort("target_date", 1))
 
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -97,7 +97,7 @@ def dashboard(username):
     if session["user"]:
         return render_template("dashboard.html", activities=activities, username=username)
 
-    return redirect(url_for("login"))
+    return redirect(url_for("login")) 
 
 
 @app.route("/admin_dashboard", methods=["GET", "POST"])
@@ -172,7 +172,7 @@ def completed(activity_id):
     return redirect(url_for("admin_dashboard"))
 
 
-@app.route("/activity_history", methods=["GET", "POST"])
+@app.route("/activity_history")
 def activity_history():
     
     activities = list(mongo.db.activities.find({"completed":"yes"}).sort("target_date", 1))
@@ -180,6 +180,19 @@ def activity_history():
     users = mongo.db.users.find().sort("username", 1)
     return render_template("activity_history.html", users=users, activities=activities)
 
+
+@app.route("/user_activity_history/<username>", methods=["GET", "POST"])
+def user_activity_history(username):
+
+    activities = list(mongo.db.activities.find({"username": session["user"],"completed":"yes"}).sort("target_date", 1))
+
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if session["user"]:
+        return render_template("user_activity_history.html", activities=activities, username=username)
+
+    return redirect(url_for("dashboard"))
 
 
 if __name__ == "__main__":

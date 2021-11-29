@@ -40,6 +40,9 @@
                 <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
                 <li><a href="{{ url_for('admin_dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
                 <li><a href="{{ url_for('activity_history') }}" class="white-text waves-effect">Activity history</a></li>
+                {% if 'user' in session %}
+                    <li><a href="{{ url_for('user_activity_history', username=session['user']) }}" class="white-text waves-effect">Activity history</a></li>
+                {% endif %}
             </ul>
         </nav>
 
