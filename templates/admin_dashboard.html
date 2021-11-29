@@ -57,7 +57,7 @@
     <div class="row">
         <ul class="col collapsible s12 heading-top no-margin">
         <li>
-            <div class="collapsible-header header-size">
+            <div class="collapsible-header">
                 <a href="{{ url_for('edit_activity', activity_id=activity._id) }}" class="btn-small red lighten-1 edit hide-on-med-and-down">Edit</a>
                 <i id="conditional-bg-{{ loop.index }}" class="material-icons time-icon">schedule</i>
                 <span class="activity-name length-size-{{ loop.index }}"><strong>{{ activity.activity_name }}</strong></span>
@@ -74,7 +74,7 @@
 
   {% endfor %}
 {% else %}
-<h4 class="center-align">You currently have no activities assigned</h4>
+<h5 class="center-align">You currently have no activities assigned</h5>
 {% endif %}
 
 

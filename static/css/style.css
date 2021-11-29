@@ -118,6 +118,24 @@ input:-webkit-autofill:active{
   white-space: nowrap;
 }
 
+.completed {
+  
+  height: 20px;
+  background-color: #3e76af;
+  font-size: x-small;
+  float: right;
+  position: absolute;
+  right: 0;
+  bottom: 32px;
+  white-space: nowrap;
+}
+
+.completed-text {
+  position: relative;
+  bottom: 6px;
+
+}
+
 .due-by {
   float: right;
   position: absolute;

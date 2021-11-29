@@ -169,6 +169,10 @@ def completed(activity_id):
     mongo.db.activities.update_one({"_id": ObjectId(activity_id)},{"$set":completed})
 
     flash("Activity marked as complete")
+
+    if session['user'] != "admin":
+        return redirect(url_for("dashboard", username=session["user"]))
+
     return redirect(url_for("admin_dashboard"))
 
 
