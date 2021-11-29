@@ -58,7 +58,7 @@ nav .sidenav-trigger i {
 }
 
 .submit-fill{
-  background-color: #4caf50;
+  background-color: #00719d;
 
 }
 
@@ -88,6 +88,10 @@ input:-webkit-autofill:active{
 
 .form-width{
   width: 60%;
+}
+
+.form-style{
+  background-color: transparent;
 }
 
 .margin-left-right{
@@ -167,12 +171,23 @@ input:-webkit-autofill:active{
   bottom: 20px;
 }
 
+.input-field{
+  margin: 2px 0;
+}
+
 .edit {
+  color: #ef2121;
+  background-color: transparent;
+  font-weight: 500;
   float: left;
   position: absolute;
   left: 0;
   bottom: 15px;
   white-space: nowrap;
+}
+
+.edit:hover {
+  background-color: #fff2f2;
 }
 
 @media (max-width: 992px) {
@@ -214,4 +229,9 @@ input:-webkit-autofill:active{
 
 .button-margin{
   margin: 3px;
+}
+
+#add-activity{
+  margin-bottom: 65px;
+  background-color: #554d76;
 }

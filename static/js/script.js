@@ -3,6 +3,7 @@
 */
 
 $(document).ready(function () {
+    $( "#activity-form" ).hide();
     $('.sidenav').sidenav();
     $('.collapsible').collapsible();
     $("select").formSelect();
@@ -14,6 +15,11 @@ $(document).ready(function () {
             done: "Select"
         }
     });
+
+    $('#add-activity').click(function() {
+        $('#activity-form').fadeToggle("medium");
+    })
+
     });
 
 /*
@@ -55,3 +61,5 @@ for (i = 0; i < length1; i++) {
         document.getElementsByClassName(`length-size-${[i+1]}`).style.fontSize = "x-small";
         } 
 }
+
+

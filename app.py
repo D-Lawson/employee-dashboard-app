@@ -36,8 +36,6 @@ def login():
             if check_password_hash(
                     check_user["password"], request.form.get("password")):
                         session["user"] = request.form.get("username").lower()
-                        flash("Hello {}, you are signed in to your Admin dashboard".format(
-                            request.form.get("username")))
                         return redirect(url_for(
                             "admin_dashboard", username=session["user"]))
         elif check_user and current_username != "admin":
