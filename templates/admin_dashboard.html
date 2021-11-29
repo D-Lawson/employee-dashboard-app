@@ -53,23 +53,25 @@
 
 {% if activities|length > 0 %}
   {% for activity in activities %}
-  <div class="row">
-    <ul class="col collapsible s12 heading-top no-margin">
-      <li>
-        <div class="collapsible-header header-size">
-            <a href="{{ url_for('edit_activity', activity_id=activity._id) }}" class="btn-small red lighten-1 edit hide-on-med-and-down">Edit</a>
-            <i id="conditional-bg-{{ loop.index }}" class="material-icons time-icon">schedule</i>
-            <span class="activity-name length-size-{{ loop.index }}"><strong>{{ activity.activity_name }}</strong></span>
-            <span class="right-align activity-margin assigned-to">Assigned to: <strong> {{ activity.username }}</strong> </span>
-            <span class="right-align activity-margin due-by">Due by: <strong> {{ activity.date_string }}</strong></span>
-            <span id="date-target-{{ loop.index }}" class="hide">{{ activity.target_date }}</span>
-        </div>
-        <div class="collapsible-body small-style">
-            <span class="edit-small"><a href="{{ url_for('edit_activity', activity_id=activity._id) }}" class="btn-small red lighten-1 edit show-on-medium-and-down">Edit</a></span>
-            <span><strong>{{ activity.activity_description }}</strong></span></div>
-      </li>
-    </ul>
-  </div>
+    
+    <div class="row">
+        <ul class="col collapsible s12 heading-top no-margin">
+        <li>
+            <div class="collapsible-header header-size">
+                <a href="{{ url_for('edit_activity', activity_id=activity._id) }}" class="btn-small red lighten-1 edit hide-on-med-and-down">Edit</a>
+                <i id="conditional-bg-{{ loop.index }}" class="material-icons time-icon">schedule</i>
+                <span class="activity-name length-size-{{ loop.index }}"><strong>{{ activity.activity_name }}</strong></span>
+                <span class="right-align activity-margin assigned-to">Assigned to: <strong> {{ activity.username }}</strong> </span>
+                <span class="right-align activity-margin due-by">Due by: <strong> {{ activity.date_string }}</strong></span>
+                <span id="date-target-{{ loop.index }}" class="hide">{{ activity.target_date }}</span>
+            </div>
+            <div class="collapsible-body small-style">
+                <span class="edit-small"><a href="{{ url_for('edit_activity', activity_id=activity._id) }}" class="btn-small red lighten-1 edit show-on-medium-and-down">Edit</a></span>
+                <span><strong>{{ activity.activity_description }}</strong></span></div>
+        </li>
+        </ul>
+    </div>
+
   {% endfor %}
 {% else %}
 <h4 class="center-align">You currently have no activities assigned</h4>

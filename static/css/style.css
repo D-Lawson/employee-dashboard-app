@@ -142,6 +142,13 @@ input:-webkit-autofill:active{
   }
 }
 
+.activity-name-a {
+  float: left;
+  position: absolute;
+  left: 50px;
+  bottom: 20px;
+}
+
 .edit {
   float: left;
   position: absolute;
@@ -176,4 +183,17 @@ input:-webkit-autofill:active{
     left: 0;
     bottom: 20px;
   }
+}
+
+.time-icon-a {
+  float: left;
+  position: absolute;
+  left: 0;
+  bottom: 19px;
+  white-space: nowrap;
+}
+
+
+.button-margin{
+  margin: 3px;
 }

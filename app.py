@@ -113,12 +113,14 @@ def admin_dashboard():
             "activity_name": request.form.get("activity_name"),
             "activity_description": request.form.get("activity_description"),
             "target_date": combine,
+            "date_string": datestring,
+            "completed": "no",
         }
         mongo.db.activities.insert_one(activity)
         flash("Activity successfully assigned to user")
         return redirect(url_for("admin_dashboard"))
     
-    activities = list(mongo.db.activities.find().sort("target_date", 1))
+    activities = list(mongo.db.activities.find({"completed":"no"}).sort("target_date", 1))
 
 
     users = mongo.db.users.find().sort("username", 1)
@@ -139,6 +141,7 @@ def edit_activity(activity_id):
             "activity_description": request.form.get("activity_description"),
             "target_date": combine,
             "date_string": datestring,
+            "completed": "no",
         }
         mongo.db.activities.update({"_id": ObjectId(activity_id)}, update)
         flash("Activity successfully updated")
@@ -154,6 +157,28 @@ def delete_activity(activity_id):
     mongo.db.activities.remove({"_id": ObjectId(activity_id)})
     flash("Activity Deleted")
     return redirect(url_for("admin_dashboard"))
+
+
+@app.route("/completed/<activity_id>")
+def completed(activity_id):
+
+    completed = {
+        "completed": "yes",
+    }
+
+    mongo.db.activities.update_one({"_id": ObjectId(activity_id)},{"$set":completed})
+
+    flash("Activity marked as complete")
+    return redirect(url_for("admin_dashboard"))
+
+
+@app.route("/activity_history", methods=["GET", "POST"])
+def activity_history():
+    
+    activities = list(mongo.db.activities.find({"completed":"yes"}).sort("target_date", 1))
+
+    users = mongo.db.users.find().sort("username", 1)
+    return render_template("activity_history.html", users=users, activities=activities)
 
 
 

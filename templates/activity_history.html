@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h5 class="center-align heading-top-bottom">Completed activities / activity history</h5>
+
+
+{% if activities|length > 0 %}
+  {% for activity in activities %}
+  <div class="row">
+      <ul class="col collapsible s12 heading-top no-margin">
+      <li>
+          <div class="collapsible-header header-size">
+              <i class="material-icons green-text time-icon-a">check</i>
+              <span class="activity-name-a length-size-{{ loop.index }}"><strong>{{ activity.activity_name }}</strong></span>
+              <span class="right-align activity-margin assigned-to">Assigned to: <strong> {{ activity.username }}</strong> </span>
+              <span class="right-align activity-margin due-by">Due by: <strong> {{ activity.date_string }}</strong></span>
+          </div>
+          <div class="collapsible-body">
+              <span><strong>{{ activity.activity_description }}</strong></span></div>
+      </li>
+      </ul>
+  </div>
+  {% endfor %}
+{% else %}
+<h4 class="center-align">You currently have no activities assigned</h4>
+{% endif %}
+
+
+{% endblock %}
