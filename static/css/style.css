@@ -80,7 +80,10 @@ nav .sidenav-trigger i {
 
 .submit-fill{
   background-color: #00719d;
+}
 
+.submit-fill:hover {
+  background-color: #1f88b1 !important;
 }
 
 .logo-style{
@@ -116,7 +119,7 @@ form .row{
 }
 
 .datepicker-date-display {
-  background-color: #00719d;
+  background-color: #933e55;
 }
 
 @media (max-width: 690px){
@@ -185,6 +188,10 @@ form .row{
   white-space: nowrap;
 }
 
+.completed:hover {
+  background-color: #5d94ca !important;
+}
+
 .submit-button {
 
   height: 25px;
@@ -195,8 +202,13 @@ form .row{
 .completed-text {
   position: relative;
   bottom: 6px;
-
 }
+
+.submit-text {
+  position: relative;
+  bottom: 3.5px;
+}
+
 
 .due-by {
   float: right;
@@ -246,7 +258,7 @@ form .row{
 .activity-name-a {
   float: left;
   position: absolute;
-  left: 50px;
+  left: 60px;
   bottom: 20px;
 }
 
@@ -276,7 +288,7 @@ form .row{
 }
 
 .edit:hover {
-  background-color: #fff2f2;
+  background-color: #fff2f2 !important;
 }
 
 @media (max-width: 992px) {
@@ -343,7 +355,18 @@ form .row{
   margin: 3px;
 }
 
-#add-activity{
+.add-activity{
   margin-bottom: 30px;
-  background-color: #554d76;
+  background-color: #933e55 !important;
+  border-radius: 14px !important;
+}
+
+.add-activity:hover {
+  background-color: #88505f !important;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+  color: #d15576;
+  font-size: inherit;
+
 }

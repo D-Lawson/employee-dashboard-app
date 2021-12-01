@@ -17,10 +17,11 @@ $(document).ready(function () {
     });
 
     $('#add-activity').click(function() {
-        $('#activity-form').fadeToggle("medium");
+        $('#activity-form').fadeToggle(800);
     })
-
     });
+
+
 
 /*
     Conditional formatting for due in 1 week, due in 2 weeks
@@ -61,5 +62,4 @@ for (i = 0; i < length1; i++) {
         document.getElementsByClassName(`length-size-${[i+1]}`).style.fontSize = "x-small";
         } 
 }
-
 

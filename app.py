@@ -170,7 +170,7 @@ def completed(activity_id):
     if session['user'] != "admin":
         return redirect(url_for("dashboard", username=session["user"]))
 
-    return
+    return redirect(url_for("admin_dashboard"))
 
 
 @app.route("/activity_history")
