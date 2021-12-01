@@ -73,9 +73,9 @@
                         {{ activity.date_string }}</strong></span>
                 <span id="date-target-{{ loop.index }}" class="hide">{{ activity.target_date }}</span>
             </div>
-            <div class="collapsible-body small-style">
-                <span class="edit-small"><a href="{{ url_for('edit_activity', activity_id=activity._id) }}"
-                        class="btn-small edit show-on-medium-and-down">Edit</a></span>
+            <div class="collapsible-body relative">
+                <span><a href="{{ url_for('edit_activity', activity_id=activity._id) }}"
+                        class="btn-small hide-desktop edit-small">Edit</a></span>
                 <span><strong>{{ activity.activity_description }}</strong></span></div>
         </li>
     </ul>

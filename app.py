@@ -120,7 +120,6 @@ def admin_dashboard():
     
     activities = list(mongo.db.activities.find({"completed":"no"}).sort("target_date", 1))
 
-
     users = mongo.db.users.find().sort("username", 1)
     return render_template("admin_dashboard.html", users=users, activities=activities)
 
@@ -171,7 +170,7 @@ def completed(activity_id):
     if session['user'] != "admin":
         return redirect(url_for("dashboard", username=session["user"]))
 
-    return redirect(url_for("admin_dashboard"))
+    return
 
 
 @app.route("/activity_history")

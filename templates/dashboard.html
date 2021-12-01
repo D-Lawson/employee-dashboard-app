@@ -13,9 +13,10 @@
           <span class="activity-name-a"><strong>{{ activity.activity_name }}</strong></span>
           <span class="right-align activity-margin due-by">Due by:<strong> {{ activity.date_string }}</strong></span>
           <span id="date-target-{{ loop.index }}" class="hide">{{ activity.target_date }}</span>
+        </div>
+        <div class="collapsible-body relative"><span><strong>{{ activity.activity_description }}</strong></span>
           <a href="{{ url_for('completed', activity_id=activity._id) }}" class="btn-small completed"><span class="completed-text">Mark as completed</span></a></span>
         </div>
-        <div class="collapsible-body"><span><strong>{{ activity.activity_description }}</strong></span></div>
       </li>
     </ul>
   </div>

@@ -34,6 +34,15 @@ header, main, footer {
   height: 40px;
 }
 
+@media (max-width: 601px){
+  .nav-style{
+    background-color: #484848;
+    height: 50px;
+  }
+}
+
+
+
 .sidenav .divider{
   margin-bottom: 12px;
 }
@@ -46,7 +55,7 @@ nav .sidenav-trigger i {
 
 @media (max-width: 601px){
   nav .sidenav-trigger i {
-    bottom: 10px;
+    bottom: 5px;
 }
 }
 
@@ -159,6 +168,11 @@ form .row{
   }
 }
 
+.relative{
+  position: relative;
+  padding-bottom: 45px;
+}
+
 .completed {
   
   height: 20px;
@@ -166,23 +180,10 @@ form .row{
   font-size: x-small;
   float: right;
   position: absolute;
-  right: 0;
-  bottom: 32px;
+  right: 0px;
+  bottom: 10px;
   white-space: nowrap;
 }
-
-@media (max-width: 690px){
-  .completed{
-    right: 140px;
-    bottom: 5px;
-  }
-  
-
-}
-
-
-right: 165px;
-bottom: 7px;
 
 .submit-button {
 
@@ -191,8 +192,6 @@ bottom: 7px;
   font-size: x-small;
 }
   
-
-
 .completed-text {
   position: relative;
   bottom: 6px;
@@ -244,7 +243,6 @@ bottom: 7px;
   }
 }
 
-
 .activity-name-a {
   float: left;
   position: absolute;
@@ -283,14 +281,37 @@ bottom: 7px;
 
 @media (max-width: 992px) {
   .edit{
-      position: relative;
       bottom: auto;
-      margin-right: 10px;
-      display: inline-block;
-      left: 0;
+      float: right;
+      position: absolute;
+      right: 0px;
+      bottom: 10px;
       white-space: nowrap;
   }
+}
+
+@media only screen and (min-width: 992px) {
+  .hide-desktop{
+    display:none;
+    width: 40px;
+    
   }
+}
+
+.edit-small{
+  color: #ef2121;
+  background-color: transparent;
+  font-weight: 500;
+  width: 60px;
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  white-space: nowrap;
+}
+
+.edit-small:hover {
+  background-color: #fff2f2;
+}
 
 .time-icon {
   float: left;
