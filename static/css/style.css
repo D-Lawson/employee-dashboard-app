@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5{
 }
 
 .heading-top-bottom{
-  margin-top: 70px;
+  margin-top: 90px;
   margin-bottom: 45px;
 }
 
@@ -40,8 +40,11 @@ header, main, footer {
     height: 50px;
   }
 }
-
-
+.fixed-nav{
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
 
 .sidenav .divider{
   margin-bottom: 12px;
@@ -79,11 +82,11 @@ nav .sidenav-trigger i {
 }
 
 .submit-fill{
-  background-color: #00719d;
+  background-color: #933e55;
 }
 
 .submit-fill:hover {
-  background-color: #1f88b1 !important;
+  background-color: #88505f !important;
 }
 
 .logo-style{
@@ -130,6 +133,13 @@ form .row{
 
 .form-style{
   background-color: transparent;
+  padding: 30px;
+  margin-bottom: 50px;
+  border-radius: 0.4rem;
+}
+
+.z-depth-3 {
+  box-shadow: 0 8px 18px 2px rgb(0 0 0 / 14%), 0 0px 10px 3px rgb(0 0 0 / 14%), 0 2px 5px -1px #933e55;
 }
 
 .margin-left-right{

@@ -21,3 +21,13 @@ def home():
 
 
 
+
+    if check_authentication() == "admin":
+        redirect(url_for("admin_dashboard"))
+    elif check_authentication() != "admin":
+        redirect(url_for("dashboard"))
+    else:
+
+
+
+

@@ -26,6 +26,12 @@ mongo = PyMongo(app)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+
+    if is_admin_authenticated():
+        return redirect(url_for("admin_dashboard"))
+    elif check_authentication():
+        return redirect(url_for("dashboard"))
+
     if request.method == "POST":
         check_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
@@ -35,14 +41,12 @@ def login():
             if check_password_hash(
                     check_user["password"], request.form.get("password")):
                         session["user"] = request.form.get("username").lower()
-                        return redirect(url_for(
-                            "admin_dashboard", username=session["user"]))
+                        return redirect(url_for("admin_dashboard"))
         elif check_user and current_username != "admin":
             if check_password_hash(
                     check_user["password"], request.form.get("password")):
                         session["user"] = request.form.get("username").lower()
-                        return redirect(url_for(
-                            "dashboard", username=session["user"]))
+                        return redirect(url_for("dashboard"))
             else:
                 flash("The Password and/or Username is incorrect.  Please try again.")
                 return redirect(url_for("login"))
@@ -193,6 +197,14 @@ def user_activity_history(username):
         return render_template("user_activity_history.html", activities=activities, username=username)
 
     return redirect(url_for("dashboard"))
+
+
+def check_authentication():
+    return 'user' in session
+
+
+def is_admin_authenticated():
+    return check_authentication() and session['user'] == "admin"
 
 
 if __name__ == "__main__":
