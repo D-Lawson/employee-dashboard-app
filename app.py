@@ -24,7 +24,6 @@ mongo = PyMongo(app)
 
 @app.route("/")
 
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -84,8 +83,8 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/dashboard/<username>", methods=["GET", "POST"])
-def dashboard(username):
+@app.route("/dashboard/", methods=["GET", "POST"])
+def dashboard():
 
     activities = list(mongo.db.activities.find({"username": session["user"],"completed":"no"}).sort("target_date", 1))
 
