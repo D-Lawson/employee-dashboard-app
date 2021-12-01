@@ -14,18 +14,14 @@
 <body>
     <header>
         <nav class="nav-style">
-            <div class="container"><a href="#" class="menu-position sidenav-trigger full hide-on-large-only"
+            <div class="container"><a href="#" class="sidenav-trigger full hide-on-large-only"
                     data-target="sidenav-mobile"><i class="material-icons">menu</i></a>
             </div>
 
-            <div class="col s12 m10">
-                <h5 class="header black-text header-text hide-on-large-only">Employee Dashboard</h5>
-
-            </div>
             <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
                 <li>
                     <div class="user-view">
-                        <img class="circle" alt="logo image metallic texture" src="static/images/metal-textures.jpg">
+                        <img class="circle" alt="logo image metallic texture" src="{{ url_for('static', filename='images/metal-textures.jpg') }}">
                         <span class="logo-style">Employee Dashboard</span>
                     </div>
                 </li>
@@ -37,9 +33,6 @@
                 {% endif %}
                     <div class="divider"></div>
                 </li>
-                {% if session.user|lower %}
-                <li><a class="white-text" href="{{ url_for('logout') }}">Log out</a></li>
-                {% endif %}
                 {% if session.user|lower == username %}
                     <li><a href="{{ url_for('dashboard', username=session['user']) }}" class="white-text waves-effect">Dashboard</a></li>
                     <li><a href="{{ url_for('user_activity_history', username=session['user']) }}" class="white-text waves-effect">Activity history</a></li>
@@ -49,6 +42,9 @@
                 {% else %}
                     <li><a class="white-text" href="{{ url_for('register') }}">Register</a></li>
                     <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
+                {% endif %}
+                {% if session.user|lower %}
+                <li><a class="white-text log" href="{{ url_for('logout') }}">Log out</a></li>
                 {% endif %}
 
             </ul>

@@ -30,20 +30,32 @@ header, main, footer {
   }
 
 .nav-style{
-  background-color:transparent;
+  background-color: #484848;
+  height: 40px;
 }
 
-.menu-position{
-    bottom: 15px;
-
+.sidenav .divider{
+  margin-bottom: 12px;
 }
+
 nav .sidenav-trigger i {
+    color: #ffffff;
+    position: absolute;
+    bottom: 13px;
+}
 
-    color: #333333;
+@media (max-width: 601px){
+  nav .sidenav-trigger i {
+    bottom: 10px;
+}
 }
 
 .sidenav{
     background-color: #484848;
+}
+
+.sidenav li>.log{
+  font-weight: 300;
 }
 
 .z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
@@ -90,6 +102,20 @@ input:-webkit-autofill:active{
   width: 60%;
 }
 
+form .row{
+  margin-bottom: 10px;
+}
+
+.datepicker-date-display {
+  background-color: #00719d;
+}
+
+@media (max-width: 690px){
+  .form-width{
+    width: 90%;
+  }
+}
+
 .form-style{
   background-color: transparent;
 }
@@ -122,6 +148,17 @@ input:-webkit-autofill:active{
   white-space: nowrap;
 }
 
+@media (max-width: 690px){
+  .assigned-to {
+    float: right;
+    position: absolute;
+    right: 150px;
+    bottom: 6px;
+    white-space: nowrap;
+    font-size: 0.77rem;
+  }
+}
+
 .completed {
   
   height: 20px;
@@ -133,6 +170,28 @@ input:-webkit-autofill:active{
   bottom: 32px;
   white-space: nowrap;
 }
+
+@media (max-width: 690px){
+  .completed{
+    right: 140px;
+    bottom: 5px;
+  }
+  
+
+}
+
+
+right: 165px;
+bottom: 7px;
+
+.submit-button {
+
+  height: 25px;
+  line-height: 32.4px;
+  font-size: x-small;
+}
+  
+
 
 .completed-text {
   position: relative;
@@ -146,6 +205,17 @@ input:-webkit-autofill:active{
   right: 0;
   bottom: 7px;
   white-space: nowrap;
+  font-size: 0.77rem;
+}
+
+@media (max-width: 690px){
+  .due-by {
+    float: right;
+    position: absolute;
+    right: 0;
+    bottom: 6px;
+    white-space: nowrap;
+  }
 }
 
 .activity-name {
@@ -164,11 +234,32 @@ input:-webkit-autofill:active{
   }
 }
 
+@media (max-width: 690px) {
+  .activity-name {
+    float: left;
+    position: absolute;
+    left: 37px;
+    bottom: 31px;
+    font-size: 0.77rem;
+  }
+}
+
+
 .activity-name-a {
   float: left;
   position: absolute;
   left: 50px;
   bottom: 20px;
+}
+
+@media (max-width: 690px) {
+  .activity-name-a {
+    float: left;
+    position: absolute;
+    left: 50px;
+    bottom: 31px;
+    font-size: 0.77rem;
+  }
 }
 
 .input-field{
@@ -232,6 +323,6 @@ input:-webkit-autofill:active{
 }
 
 #add-activity{
-  margin-bottom: 65px;
+  margin-bottom: 30px;
   background-color: #554d76;
 }
