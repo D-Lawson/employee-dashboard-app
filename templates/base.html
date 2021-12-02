@@ -13,42 +13,41 @@
 
 <body>
     <header>
-        <nav class="nav-style fixed-nav">
+        <nav class="nav-style">
             <div class="container"><a href="#" class="sidenav-trigger full hide-on-large-only"
                     data-target="sidenav-mobile"><i class="material-icons">menu</i></a>
             </div>
-
-            <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
-                <li>
-                    <div class="user-view">
-                        <img class="circle" alt="logo image metallic texture" src="{{ url_for('static', filename='images/metal-textures.jpg') }}">
-                        <span class="logo-style">Employee Dashboard</span>
-                    </div>
-                </li>
-                {% if not session.user | lower %}
-                <li><a class="white-text" href="{{ url_for('login') }}"><i
-                            class="white-text material-icons">vpn_key</i>Log
-                        in</a></li>
-                <li>
-                {% endif %}
-                    <div class="divider"></div>
-                </li>
-                {% if session.user | lower == username %}
-                    <li><a href="{{ url_for('dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
-                    <li><a href="{{ url_for('user_activity_history') }}" class="white-text waves-effect">Activity history</a></li>
-                {% elif session.user|lower == "admin"|lower %}
-                    <li><a href="{{ url_for('admin_dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
-                    <li><a href="{{ url_for('activity_history') }}" class="white-text waves-effect">Activity history</a></li>
-                {% else %}
-                    <li><a class="white-text" href="{{ url_for('register') }}">Register</a></li>
-                    <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
-                {% endif %}
-                {% if session.user|lower %}
-                    <li><a class="white-text log" href="{{ url_for('logout') }}">Log out</a></li>
-                {% endif %}
-
-            </ul>
         </nav>
+        <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
+            <li>
+                <div class="user-view">
+                    <img class="circle" alt="logo image metallic texture" src="{{ url_for('static', filename='images/metal-textures.jpg') }}">
+                    <span class="logo-style">Employee Dashboard</span>
+                </div>
+            </li>
+            {% if not session.user | lower %}
+            <li><a class="white-text" href="{{ url_for('login') }}"><i
+                        class="white-text material-icons">vpn_key</i>Log
+                    in</a></li>
+            <li>
+            {% endif %}
+                <div class="divider"></div>
+            </li>
+            {% if session.user | lower == username %}
+                <li><a href="{{ url_for('dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
+                <li><a href="{{ url_for('user_activity_history') }}" class="white-text waves-effect">Activity history</a></li>
+            {% elif session.user|lower == "admin"|lower %}
+                <li><a href="{{ url_for('admin_dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
+                <li><a href="{{ url_for('activity_history') }}" class="white-text waves-effect">Activity history</a></li>
+            {% else %}
+                <li><a class="white-text" href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
+            {% endif %}
+            {% if session.user|lower %}
+                <li><a class="white-text log" href="{{ url_for('logout') }}">Log out</a></li>
+            {% endif %}
+
+        </ul>
 
     </header>
 

@@ -32,6 +32,9 @@ header, main, footer {
 .nav-style{
   background-color: #484848;
   height: 40px;
+  position: fixed;
+  top: 0;
+  z-index: 2;
 }
 
 @media (max-width: 601px){
@@ -39,11 +42,6 @@ header, main, footer {
     background-color: #484848;
     height: 50px;
   }
-}
-.fixed-nav{
-  position: fixed;
-  top: 0;
-  z-index: 2;
 }
 
 .sidenav .divider{
