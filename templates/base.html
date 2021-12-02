@@ -25,7 +25,7 @@
                         <span class="logo-style">Employee Dashboard</span>
                     </div>
                 </li>
-                {% if not session.user|lower %}
+                {% if not session.user | lower %}
                 <li><a class="white-text" href="{{ url_for('login') }}"><i
                             class="white-text material-icons">vpn_key</i>Log
                         in</a></li>
@@ -33,9 +33,9 @@
                 {% endif %}
                     <div class="divider"></div>
                 </li>
-                {% if session.user|lower == username %}
-                    <li><a href="{{ url_for('dashboard', username=session['user']) }}" class="white-text waves-effect">Dashboard</a></li>
-                    <li><a href="{{ url_for('user_activity_history', username=session['user']) }}" class="white-text waves-effect">Activity history</a></li>
+                {% if session.user | lower == username %}
+                    <li><a href="{{ url_for('dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
+                    <li><a href="{{ url_for('user_activity_history') }}" class="white-text waves-effect">Activity history</a></li>
                 {% elif session.user|lower == "admin"|lower %}
                     <li><a href="{{ url_for('admin_dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
                     <li><a href="{{ url_for('activity_history') }}" class="white-text waves-effect">Activity history</a></li>
@@ -44,7 +44,7 @@
                     <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
                 {% endif %}
                 {% if session.user|lower %}
-                <li><a class="white-text log" href="{{ url_for('logout') }}">Log out</a></li>
+                    <li><a class="white-text log" href="{{ url_for('logout') }}">Log out</a></li>
                 {% endif %}
 
             </ul>
@@ -57,7 +57,7 @@
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
-        <div style="padding-left: 300px;" class="row flashes">
+        <div style="padding-left: 300px; margin-top: 55px;" class="row flashes">
             <h5 class="lime lighten-3 black-text center-align">{{ message }}</h5>
         </div>
         {% endfor %}
