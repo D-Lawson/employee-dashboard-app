@@ -35,16 +35,17 @@ def login():
         check_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
         current_username = request.form.get("username").lower()
+        current_password = request.form.get("password")
 
         if check_user and current_username == "admin":
             if check_password_hash(
-                    check_user["password"], request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
+                    check_user["password"], current_password):
+                session["user"] = current_username
                 return redirect(url_for("admin_dashboard"))
         elif check_user and current_username != "admin":
             if check_password_hash(
-                    check_user["password"], request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
+                    check_user["password"], current_password):
+                session["user"] = current_username
                 return redirect(url_for("dashboard"))
             else:
                 flash("The Password and/or Username is incorrect.  Please try again.")
@@ -59,23 +60,24 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
+        current_user = request.form.get("username").lower()
         check_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+            {"username": current_user})
 
         if check_user:
             flash("This username is already registered")
             return redirect(url_for("register"))
 
         create_user = {
-            "username": request.form.get("username").lower(),
+            "username": current_user,
             "password": generate_password_hash(request.form.get("password"))
         }
         mongo.db.users.insert_one(create_user)
 
-        session["user"] = request.form.get("username").lower()
+        session["user"] = current_user
         flash(
             "Thank you for registering.  Your are now signed in to your personal dashboard.")
-        return redirect(url_for("dashboard", username=session["user"]))
+        return redirect(url_for("dashboard"))
 
     return render_template("register.html")
 
