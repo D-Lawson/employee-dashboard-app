@@ -211,6 +211,10 @@ form .row{
   background-color: transparent;
 }
 
+.activity-header{
+  background-color: white;
+}
+
 .activity-margin{
   margin-left: 7px;
   margin-right: 7px;
