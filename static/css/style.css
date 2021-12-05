@@ -72,6 +72,16 @@ header, main, footer {
   margin: 2px 0;
 }
 
+.flash-style{
+  padding-left: 300px; margin-top: 55px;
+}
+
+@media (max-width: 992px){
+  .flash-style{
+    padding-left: 0px; margin-top: 55px;
+}
+}
+
 /* Nav and sidenav styling */
 
 .nav-style{

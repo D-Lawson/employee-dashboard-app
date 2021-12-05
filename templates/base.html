@@ -58,7 +58,7 @@
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
-            <div style="padding-left: 300px; margin-top: 55px;" class="row flashes">
+            <div class="row flashes flash-style">
                 <h5 class="lime lighten-3 black-text center-align">{{ message }}</h5>
             </div>
         {% endfor %}
