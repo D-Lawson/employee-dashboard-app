@@ -207,6 +207,10 @@ form .row{
 
 /* Styling for rendered activities */
 
+.header-fill{
+  background-color: transparent;
+}
+
 .activity-margin{
   margin-left: 7px;
   margin-right: 7px;
