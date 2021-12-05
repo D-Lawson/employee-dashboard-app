@@ -3,6 +3,8 @@
 
 <h5 class="center-align heading-top-bottom">Welcome to the Admin dashboard</h5>
 
+<!-- ASSIGN NEW ACTIVITY TO USER -->
+
 <div class="row center-align">
     <a id="add-activity" href="#!" class="btn-small waves-effect add-activity"> Assign new activity to user</a>
 </div>
@@ -55,6 +57,8 @@
 </div>
 
 
+<!-- RENDER ALL ASSIGNED ACTIVITIES -->
+
 {% if activities|length > 0 %}
 {% for activity in activities %}
 
@@ -76,14 +80,15 @@
             <div class="collapsible-body relative">
                 <span><a href="{{ url_for('edit_activity', activity_id=activity._id) }}"
                         class="btn-small hide-desktop edit-small">Edit</a></span>
-                <span><strong>{{ activity.activity_description }}</strong></span></div>
+                <span><strong>{{ activity.activity_description }}</strong></span>
+            </div>
         </li>
     </ul>
 </div>
 
 {% endfor %}
 {% else %}
-<h5 class="center-align">You currently have no activities assigned</h5>
+    <h5 class="center-align">You currently have no activities assigned</h5>
 {% endif %}
 
 

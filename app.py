@@ -23,6 +23,9 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
+
+
+# User login authentication.  Validate hashed password.
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -57,6 +60,7 @@ def login():
     return render_template("login.html")
 
 
+# User registration with hashed password generator
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -81,7 +85,7 @@ def register():
 
     return render_template("register.html")
 
-
+# User log out
 @app.route("/logout")
 def logout():
     flash("Sucessfully logged out from dashboard")
@@ -89,21 +93,25 @@ def logout():
     return redirect(url_for("login"))
 
 
+# User dashboard, retrieve and sort data from db
 @app.route("/dashboard/", methods=["GET", "POST"])
 def dashboard():
 
+    current_user = session["user"]
+
     activities = list(mongo.db.activities.find(
-        {"username": session["user"], "completed": "no"}).sort("target_date", 1))
+        {"username": current_user, "completed": "no"}).sort("target_date", 1))
 
     username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+        {"username": current_user})["username"]
 
-    if session["user"]:
+    if current_user:
         return render_template("dashboard.html", activities=activities, username=username)
 
     return redirect(url_for("login"))
 
 
+# Admin dashboard, retrieve and sort data from db
 @app.route("/admin_dashboard", methods=["GET", "POST"])
 def admin_dashboard():
     if request.method == "POST":
@@ -131,6 +139,7 @@ def admin_dashboard():
     return render_template("admin_dashboard.html", users=users, activities=activities)
 
 
+# Edit activity and update db
 @app.route("/edit_activity/<activity_id>", methods=["GET", "POST"])
 def edit_activity(activity_id):
     if request.method == "POST":
@@ -156,6 +165,7 @@ def edit_activity(activity_id):
     return render_template("edit_activity.html", activity=activity, users=users)
 
 
+# Delete activity
 @app.route("/delete_activity/<activity_id>")
 def delete_activity(activity_id):
     mongo.db.activities.remove({"_id": ObjectId(activity_id)})
@@ -163,8 +173,11 @@ def delete_activity(activity_id):
     return redirect(url_for("admin_dashboard"))
 
 
+#  Mark activity as completed
 @app.route("/completed/<activity_id>")
 def completed(activity_id):
+
+    current_user = session["user"]
 
     completed = {
         "completed": "yes",
@@ -175,12 +188,13 @@ def completed(activity_id):
 
     flash("Activity marked as complete")
 
-    if session['user'] != "admin":
-        return redirect(url_for("dashboard", username=session["user"]))
+    if current_user != "admin":
+        return redirect(url_for("dashboard", username=current_user))
 
     return redirect(url_for("admin_dashboard"))
 
 
+# Render all activity history from db with sort and filter
 @app.route("/activity_history")
 def activity_history():
 
@@ -193,26 +207,32 @@ def activity_history():
     return redirect(url_for("login"))
 
 
+# Render user specific activity history from db with sort and filter
 @app.route("/user_activity_history", methods=["GET", "POST"])
 def user_activity_history():
 
+    current_user = session["user"]
+
     if not is_admin_authenticated():
         activities = list(mongo.db.activities.find(
-            {"username": session["user"], "completed": "yes"}).sort("target_date", 1))
+            {"username": current_user, "completed": "yes"}).sort("target_date", 1))
         username = mongo.db.users.find_one(
-            {"username": session["user"]})["username"]
-    if session["user"]:
+            {"username": current_user})["username"]
+    if current_user:
         return render_template("user_activity_history.html", activities=activities, username=username)
 
     return redirect(url_for("login"))
 
 
+# Check active user for authentication
 def check_authentication():
     return 'user' in session
 
 
+# Check if active user is the admin
 def is_admin_authenticated():
     return check_authentication() and session['user'] == "admin"
+
 
 
 if __name__ == "__main__":

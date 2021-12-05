@@ -1,17 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
 
+/* General HTML tags styling */
+
+main{
+  flex: 1 0 auto;
+}
+
 body{
   background-color: #fbfbfd;
   overflow-x: hidden;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
-
 
 h1, h2, h3, h4, h5{
   font-family: 'Raleway', sans-serif;
 }
 
+.main-style{
+  margin-top: 50px !important;
+}
+
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+/* General style rules */
+
 .heading-top-bottom{
-  margin-top: 90px;
+  margin-top: 70px;
   margin-bottom: 45px;
 }
 
@@ -19,15 +43,36 @@ h1, h2, h3, h4, h5{
   margin-top: 70px;
 }
 
-header, main, footer {
-    padding-left: 300px;
-  }
+.logo-style{
+  position: relative;
+  bottom: 56px;
+  left: 23px;
+  font-size: 22px;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  font-family: 'Raleway';
+  color: azure;
+}
 
-  @media only screen and (max-width : 992px) {
-    header, main, footer {
-      padding-left: 0;
-    }
-  }
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+
+.no-margin{
+  margin: 0,
+}
+
+.no-margin{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.input-field{
+  margin: 2px 0;
+}
+
+/* Nav and sidenav styling */
 
 .nav-style{
   background-color: #484848;
@@ -39,7 +84,6 @@ header, main, footer {
 
 @media (max-width: 601px){
   .nav-style{
-    background-color: #484848;
     height: 50px;
   }
 }
@@ -68,6 +112,19 @@ nav .sidenav-trigger i {
   font-weight: 300;
 }
 
+/* Footer styling */
+
+.footer-style{
+  background-color: #a12f3c;
+  height: 40px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  margin-top: 100px;
+}
+
+/* Form styling */
+
 .z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
     -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 0 0 0 rgb(0 0 0 / 20%);
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 0 0 0 rgb(0 0 0 / 20%);
@@ -87,16 +144,6 @@ nav .sidenav-trigger i {
   background-color: #88505f !important;
 }
 
-.logo-style{
-  position: relative;
-  bottom: 56px;
-  left: 23px;
-  font-size: 22px;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  font-family: 'Raleway';
-  color: azure;
-}
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
@@ -104,11 +151,8 @@ input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
-
-.container {
-  margin: 0 auto;
-  max-width: 1280px;
-  width: 90%;
+.login-margin{
+  padding-bottom: 0 !important;
 }
 
 .form-width{
@@ -140,14 +184,28 @@ form .row{
   box-shadow: 0 8px 18px 2px rgb(0 0 0 / 14%), 0 0px 10px 3px rgb(0 0 0 / 14%), 0 2px 5px -1px #933e55;
 }
 
-.margin-left-right{
-  margin-left: 5px;
+.submit-button {
+  height: 25px;
+  line-height: 32.4px;
+  font-size: x-small;
 }
 
-.no-margin{
-  margin-top: 0;
-  margin-bottom: 0;
+.add-activity{
+  margin-bottom: 30px;
+  background-color: #933e55 !important;
+  border-radius: 14px !important;
 }
+
+.add-activity:hover {
+  background-color: #88505f !important;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+  color: #d15576;
+  font-size: inherit;
+}
+
+/* Styling for rendered activities */
 
 .activity-margin{
   margin-left: 7px;
@@ -157,7 +215,6 @@ form .row{
 .collapsible-header{
   position: relative !important;
   height: 60px;
-  
 }
 
 .assigned-to {
@@ -185,7 +242,6 @@ form .row{
 }
 
 .completed {
-  
   height: 20px;
   background-color: #3e76af;
   font-size: x-small;
@@ -199,13 +255,6 @@ form .row{
 .completed:hover {
   background-color: #5d94ca !important;
 }
-
-.submit-button {
-
-  height: 25px;
-  line-height: 32.4px;
-  font-size: x-small;
-}
   
 .completed-text {
   position: relative;
@@ -216,7 +265,6 @@ form .row{
   position: relative;
   bottom: 3.5px;
 }
-
 
 .due-by {
   float: right;
@@ -278,10 +326,6 @@ form .row{
     bottom: 31px;
     font-size: 0.77rem;
   }
-}
-
-.input-field{
-  margin: 2px 0;
 }
 
 .edit {
@@ -358,23 +402,6 @@ form .row{
   white-space: nowrap;
 }
 
-
 .button-margin{
   margin: 3px;
-}
-
-.add-activity{
-  margin-bottom: 30px;
-  background-color: #933e55 !important;
-  border-radius: 14px !important;
-}
-
-.add-activity:hover {
-  background-color: #88505f !important;
-}
-
-.dropdown-content li>a, .dropdown-content li>span {
-  color: #d15576;
-  font-size: inherit;
-
 }

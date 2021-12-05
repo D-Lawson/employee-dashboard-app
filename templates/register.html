@@ -3,9 +3,11 @@
 
 <h4 class="center-align heading-top-bottom">Register</h4>
 
+<!-- REGISTRATION FORM -->
+
 <div class="row form-width">
     <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
-        <div class="form-style">
+        <div class="form-style login-margin">
             <div class="row">
                 <div class="input-field col s12">
                     <input id="username" name="username" type="text" class="validate" required>
@@ -30,7 +32,7 @@
 
 <div class="row">
     <div class="col s12">
-        <p class="center-align">
+        <p class="center-align no-margin">
             Alternatively,
             <a href="{{ url_for('login') }}" class="red-text">Log In</a> here.
         </p>

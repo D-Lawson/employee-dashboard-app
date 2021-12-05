@@ -13,11 +13,13 @@
 
 <body>
     <header>
+        <!-- TOP NAV -->
         <nav class="nav-style">
             <div class="container"><a href="#" class="sidenav-trigger full hide-on-large-only"
                     data-target="sidenav-mobile"><i class="material-icons">menu</i></a>
             </div>
         </nav>
+        <!-- SIDE NAV WITH LINKS -->
         <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
             <li>
                 <div class="user-view">
@@ -26,13 +28,14 @@
                 </div>
             </li>
             {% if not session.user | lower %}
-            <li><a class="white-text" href="{{ url_for('login') }}"><i
-                        class="white-text material-icons">vpn_key</i>Log
-                    in</a></li>
-            <li>
+                <li><a class="white-text" href="{{ url_for('login') }}"><i
+                            class="white-text material-icons">vpn_key</i>Log
+                        in</a>
+                </li>
             {% endif %}
+                <li>
                 <div class="divider"></div>
-            </li>
+                </li>
             {% if session.user | lower == username %}
                 <li><a href="{{ url_for('dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
                 <li><a href="{{ url_for('user_activity_history') }}" class="white-text waves-effect">Activity history</a></li>
@@ -46,29 +49,38 @@
             {% if session.user|lower %}
                 <li><a class="white-text log" href="{{ url_for('logout') }}">Log out</a></li>
             {% endif %}
-
         </ul>
-
     </header>
 
-    <section>
+    <!-- FLASHED MESSAGES -->
 
+    <section>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
-        <div style="padding-left: 300px; margin-top: 55px;" class="row flashes">
-            <h5 class="lime lighten-3 black-text center-align">{{ message }}</h5>
-        </div>
+            <div style="padding-left: 300px; margin-top: 55px;" class="row flashes">
+                <h5 class="lime lighten-3 black-text center-align">{{ message }}</h5>
+            </div>
         {% endfor %}
         {% endif %}
         {% endwith %}
-
     </section>
 
-    <main class="container">
+    <!-- MAIN CONTAINER TO EMBED TEMPLATES -->
+
+    <main class="container main-style">
         {% block content %}
         {% endblock %}
     </main>
+
+    <!-- FOOTER -->
+
+    <footer class="page-footer footer-style">
+        <div class="container">
+        </div>
+    </footer>
+
+    <!-- SCRIPT SOURCES -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
