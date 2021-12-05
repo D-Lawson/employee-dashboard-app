@@ -137,11 +137,11 @@ nav .sidenav-trigger i {
 }
 
 .submit-fill{
-  background-color: #933e55;
+  background-color: #a12f3c;
 }
 
 .submit-fill:hover {
-  background-color: #88505f !important;
+  background-color: #c5525f !important;
 }
 
 input:-webkit-autofill,
@@ -192,12 +192,12 @@ form .row{
 
 .add-activity{
   margin-bottom: 30px;
-  background-color: #933e55 !important;
+  background-color: #a12f3c !important;
   border-radius: 14px !important;
 }
 
 .add-activity:hover {
-  background-color: #88505f !important;
+  background-color: #c5525f !important;
 }
 
 .dropdown-content li>a, .dropdown-content li>span {
