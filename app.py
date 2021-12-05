@@ -1,12 +1,11 @@
 import os
+from datetime import datetime
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-import time
-from datetime import datetime
 if os.path.exists("env.py"):
     import env
 
@@ -23,12 +22,12 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-
-
-# User login authentication.  Validate hashed password.
+# User login authentication.
 @app.route("/login", methods=["GET", "POST"])
 def login():
-
+    """
+    Authenticates user and validates the hashed password
+    """
     if is_admin_authenticated():
         return redirect(url_for("admin_dashboard"))
     elif check_authentication():
@@ -45,24 +44,29 @@ def login():
                     check_user["password"], current_password):
                 session["user"] = current_username
                 return redirect(url_for("admin_dashboard"))
+            else:
+                flash("The Password and/or Username is incorrect.")
+                return redirect(url_for("login"))
         elif check_user and current_username != "admin":
             if check_password_hash(
                     check_user["password"], current_password):
                 session["user"] = current_username
                 return redirect(url_for("dashboard"))
             else:
-                flash("The Password and/or Username is incorrect.  Please try again.")
+                flash("The Password and/or Username is incorrect.")
                 return redirect(url_for("login"))
-
         else:
-            flash("The Password and/or Username is incorrect.  Please try again.")
+            flash("The Password and/or Username is incorrect.")
             return redirect(url_for("login"))
     return render_template("login.html")
 
 
-# User registration with hashed password generator
+# User registration
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Registers new user into db and generates hashed p/w
+    """
     if request.method == "POST":
         current_user = request.form.get("username").lower()
         check_user = mongo.db.users.find_one(
@@ -80,23 +84,30 @@ def register():
 
         session["user"] = current_user
         flash(
-            "Thank you for registering.  Your are now signed in to your personal dashboard.")
+            """Thank you for registering.  You are now signed in
+            to your personal dashboard.""")
         return redirect(url_for("dashboard"))
 
     return render_template("register.html")
 
+
 # User log out
 @app.route("/logout")
 def logout():
+    """
+    Logs the user out of the system
+    """
     flash("Sucessfully logged out from dashboard")
     session.pop("user")
     return redirect(url_for("login"))
 
 
-# User dashboard, retrieve and sort data from db
+# User dashboard
 @app.route("/dashboard/", methods=["GET", "POST"])
 def dashboard():
-
+    """
+    Renders the user's dashboard, retrieves/sorts all uncompleted activities
+    """
     current_user = session["user"]
 
     activities = list(mongo.db.activities.find(
@@ -106,14 +117,18 @@ def dashboard():
         {"username": current_user})["username"]
 
     if current_user:
-        return render_template("dashboard.html", activities=activities, username=username)
+        return render_template(
+            "dashboard.html", activities=activities, username=username)
 
     return redirect(url_for("login"))
 
 
-# Admin dashboard, retrieve and sort data from db
+# Admin dashboard
 @app.route("/admin_dashboard", methods=["GET", "POST"])
 def admin_dashboard():
+    """
+    Renders the admin dashboard including all uncompleted activities
+    """
     if request.method == "POST":
         datestring = request.form.get("target_date")
         unixdate = datetime.strptime(datestring, "%d %B, %Y").date()
@@ -136,12 +151,16 @@ def admin_dashboard():
         {"completed": "no"}).sort("target_date", 1))
 
     users = mongo.db.users.find().sort("username", 1)
-    return render_template("admin_dashboard.html", users=users, activities=activities)
+    return render_template(
+        "admin_dashboard.html", users=users, activities=activities)
 
 
-# Edit activity and update db
+# Edit activity
 @app.route("/edit_activity/<activity_id>", methods=["GET", "POST"])
 def edit_activity(activity_id):
+    """
+    Edits the selected activity ID and updates db
+    """
     if request.method == "POST":
         datestring = request.form.get("target_date")
         unixdate = datetime.strptime(datestring, "%d %B, %Y").date()
@@ -162,12 +181,16 @@ def edit_activity(activity_id):
     activity = mongo.db.activities.find_one({"_id": ObjectId(activity_id)})
     users = mongo.db.users.find().sort("username", 1)
 
-    return render_template("edit_activity.html", activity=activity, users=users)
+    return render_template(
+        "edit_activity.html", activity=activity, users=users)
 
 
 # Delete activity
 @app.route("/delete_activity/<activity_id>")
 def delete_activity(activity_id):
+    """
+    Deletes the selected activity ID from db.
+    """
     mongo.db.activities.remove({"_id": ObjectId(activity_id)})
     flash("Activity Deleted")
     return redirect(url_for("admin_dashboard"))
@@ -176,15 +199,15 @@ def delete_activity(activity_id):
 #  Mark activity as completed
 @app.route("/completed/<activity_id>")
 def completed(activity_id):
-
+    """
+    Marks the selected activity ID as completed in db
+    """
     current_user = session["user"]
 
-    completed = {
-        "completed": "yes",
-    }
+    completed_activity = {"completed": "yes"}
 
     mongo.db.activities.update_one(
-        {"_id": ObjectId(activity_id)}, {"$set": completed})
+        {"_id": ObjectId(activity_id)}, {"$set": completed_activity})
 
     flash("Activity marked as complete")
 
@@ -194,45 +217,57 @@ def completed(activity_id):
     return redirect(url_for("admin_dashboard"))
 
 
-# Render all activity history from db with sort and filter
+# Render all activity history
 @app.route("/activity_history")
 def activity_history():
-
+    """
+    Renders all completed activities with sort and filter
+    """
     if is_admin_authenticated():
         activities = list(mongo.db.activities.find(
             {"completed": "yes"}).sort("target_date", 1))
         users = mongo.db.users.find().sort("username", 1)
-        return render_template("activity_history.html", users=users, activities=activities)
+        return render_template(
+            "activity_history.html", users=users, activities=activities)
 
     return redirect(url_for("login"))
 
 
-# Render user specific activity history from db with sort and filter
+# Render user specific activity
 @app.route("/user_activity_history", methods=["GET", "POST"])
 def user_activity_history():
-
+    """
+    Renders all completed activities for the active user
+    """
     current_user = session["user"]
 
     if not is_admin_authenticated():
         activities = list(mongo.db.activities.find(
-            {"username": current_user, "completed": "yes"}).sort("target_date", 1))
+            {"username": current_user, "completed": "yes"}).sort(
+                "target_date", 1))
         username = mongo.db.users.find_one(
             {"username": current_user})["username"]
     if current_user:
-        return render_template("user_activity_history.html", activities=activities, username=username)
+        return render_template(
+            "user_activity_history.html",
+            activities=activities, username=username)
 
     return redirect(url_for("login"))
 
 
-# Check active user for authentication
+# Other functions
 def check_authentication():
+    """
+    Checks the active user
+    """
     return 'user' in session
 
 
-# Check if active user is the admin
 def is_admin_authenticated():
+    """
+    Checks whether the active user is the admin
+    """
     return check_authentication() and session['user'] == "admin"
-
 
 
 if __name__ == "__main__":
