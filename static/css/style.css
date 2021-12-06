@@ -185,9 +185,13 @@ form .row{
 
 .form-style{
   background-color: transparent;
-  padding: 30px;
+  padding: 30px 20px 15px 20px;
   margin-bottom: 50px;
   border-radius: 0.4rem;
+}
+
+.form-margin{
+  margin-bottom: 5px;
 }
 
 .z-depth-3 {
@@ -216,6 +220,10 @@ form .row{
 }
 
 /* Styling for rendered activities */
+
+.activity-container{
+  margin-top: 16px;
+}
 
 .header-fill{
   background-color: transparent;

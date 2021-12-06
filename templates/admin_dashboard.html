@@ -5,7 +5,7 @@
 
 <!-- ASSIGN NEW ACTIVITY TO USER -->
 
-<div class="row center-align">
+<div class="row center-align form-margin">
     <a id="add-activity" href="#!" class="btn-small waves-effect add-activity"> Assign new activity to user</a>
 </div>
 <div id="activity-form" class="row form-width form-style z-depth-3">
@@ -59,37 +59,40 @@
 
 <!-- RENDER ALL ASSIGNED ACTIVITIES -->
 
+<div class="activity-container">
+
 {% if activities|length > 0 %}
 {% for activity in activities %}
 
-<div class="row">
-    <ul class="col collapsible s12 heading-top no-margin activity-header">
-        <li>
-            <div class="collapsible-header header-fill">
-                <a href="{{ url_for('edit_activity', activity_id=activity._id) }}"
-                    class="btn-small edit hide-on-med-and-down">Edit</a>
-                <i id="conditional-bg-{{ loop.index }}" class="material-icons time-icon">schedule</i>
-                <span
-                    class="activity-name length-size-{{ loop.index }}"><strong>{{ activity.activity_name }}</strong></span>
-                <span class="right-align activity-margin assigned-to">Assigned to: <strong>
-                        {{ activity.username }}</strong> </span>
-                <span class="right-align activity-margin due-by">Due by: <strong>
-                        {{ activity.date_string }}</strong><span><i class="material-icons arrow">arrow_downward</i></span></span>
-                <span id="date-target-{{ loop.index }}" class="hide">{{ activity.target_date }}</span>
-            </div>
-            <div class="collapsible-body relative">
-                <span><a href="{{ url_for('edit_activity', activity_id=activity._id) }}"
-                        class="btn-small hide-desktop edit-small">Edit</a></span>
-                <span><strong>{{ activity.activity_description }}</strong></span>
-            </div>
-        </li>
-    </ul>
+    <div class="row">
+        <ul class="col collapsible s12 heading-top no-margin activity-header">
+            <li>
+                <div class="collapsible-header header-fill">
+                    <a href="{{ url_for('edit_activity', activity_id=activity._id) }}"
+                        class="btn-small edit hide-on-med-and-down">Edit</a>
+                    <i id="conditional-bg-{{ loop.index }}" class="material-icons time-icon">schedule</i>
+                    <span
+                        class="activity-name length-size-{{ loop.index }}"><strong>{{ activity.activity_name }}</strong></span>
+                    <span class="right-align activity-margin assigned-to">Assigned to: <strong>
+                            {{ activity.username }}</strong> </span>
+                    <span class="right-align activity-margin due-by">Due by: <strong>
+                            {{ activity.date_string }}</strong><span><i class="material-icons arrow">arrow_downward</i></span></span>
+                    <span id="date-target-{{ loop.index }}" class="hide">{{ activity.target_date }}</span>
+                </div>
+                <div class="collapsible-body relative">
+                    <span><a href="{{ url_for('edit_activity', activity_id=activity._id) }}"
+                            class="btn-small hide-desktop edit-small">Edit</a></span>
+                    <span><strong>{{ activity.activity_description }}</strong></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    {% endfor %}
+    {% else %}
+        <h5 class="center-align">You currently have no activities assigned</h5>
+    {% endif %}
+
 </div>
-
-{% endfor %}
-{% else %}
-    <h5 class="center-align">You currently have no activities assigned</h5>
-{% endif %}
-
 
 {% endblock %}
