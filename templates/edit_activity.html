@@ -5,7 +5,7 @@
 
 <!-- EDIT ACTIVITY FORM -->
 
-<div class="row form-width form-style z-depth-3">
+<div class="row form-width form-style1 z-depth-3">
     <form class="col s12" method="POST" action="{{ url_for('edit_activity', activity_id=activity._id) }}">
         <!-- assign to employee -->
         <div class="row">
@@ -47,11 +47,20 @@
         <!-- submit activity -->
         <div class="row">
             <div class="col s12 center-align">
-                <a href="{{ url_for('completed', activity_id=activity._id) }}" class="btn-small blue button-margin">Completed</a>
                 <button type="submit" class="col s12 m6 offset-m3 btn waves-effect waves-light submit-fill text-shadow">
                     Update activity<i class="material-icons right">send</i>
                 </button>
-                <a href="{{ url_for('delete_activity', activity_id=activity._id) }}" class="btn-small red button-margin">Delete activity</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4 center-align">
+                <a href="{{ url_for('cancel') }}" class="btn-small grey darken-1 button-margin edit-button-width">Cancel</a>
+            </div>
+            <div class="col s4 center-align">
+                <a href="{{ url_for('delete_activity', activity_id=activity._id) }}" class="btn-small red darken-1 button-margin edit-button-width">Delete activity</a>
+            </div>
+            <div class="col s4 center-align">
+                <a href="{{ url_for('completed', activity_id=activity._id) }}" class="btn-small green darken-1 button-margin edit-button-width">Completed</a>
             </div>
         </div>
     </form>

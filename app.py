@@ -195,6 +195,19 @@ def delete_activity(activity_id):
     flash("Activity Deleted")
     return redirect(url_for("admin_dashboard"))
 
+# Cancel edit activity
+@app.route("/cancel")
+def cancel():
+    """
+    Cancels the edit and redirects to the dashboard
+    """
+    if is_admin_authenticated():
+        return redirect(url_for("admin_dashboard"))
+    elif check_authentication():
+        return redirect(url_for("dashboard"))
+
+    return render_template("login.html")
+
 
 #  Mark activity as completed
 @app.route("/completed/<activity_id>")
