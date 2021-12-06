@@ -12,11 +12,12 @@
         <li>
             <div class="collapsible-header header-size header-fill">
                 <i class="material-icons green-text time-icon-a">check</i>
-                <span class="activity-name-a length-size-{{ loop.index }}"><strong>{{ activity.activity_name }}</strong></span>
+                <span class="activity-name-a"><strong>{{ activity.activity_name }}</strong></span>
                 <span class="right-align activity-margin assigned-to">Assigned to: <strong> {{ activity.username }}</strong> </span>
                 <span class="right-align activity-margin due-by">Due by: <strong> {{ activity.date_string }}</strong><span><i class="material-icons arrow">arrow_downward</i></span></span>
             </div>
-            <div class="collapsible-body">
+            <div class="collapsible-body relative-container">
+                <span id="date-completed-{{ loop.index }}" class="right-align activity-margin completed-date">{{ activity.date_completed }}</span>
                 <span><strong>{{ activity.activity_description }}</strong></span></div>
         </li>
       </ul>

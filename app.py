@@ -219,8 +219,15 @@ def completed(activity_id):
 
     completed_activity = {"completed": "yes"}
 
+    unixdate = datetime.now().date()
+    unixtime = datetime.now().time()
+    combine = datetime.combine(unixdate, unixtime)
+
     mongo.db.activities.update_one(
         {"_id": ObjectId(activity_id)}, {"$set": completed_activity})
+
+    mongo.db.activities.update_one(
+        {"_id": ObjectId(activity_id)}, {"$set":{"date_completed": combine}})
 
     flash("Activity marked as complete")
 

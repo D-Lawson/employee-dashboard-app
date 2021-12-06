@@ -45,6 +45,29 @@ for (i = 0; i < number; i++) {
         } else if (varDate < today.addDays(14)) {
             document.getElementById(`conditional-bg-${[i+1]}`).style.color = "orange";
         }
-    }
+    };
 
 
+/*
+    Convert completed date to string
+*/
+
+var dayFormat = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+};
+
+date_number = $('.assigned-to').length;
+for (i = 0; i < date_number; i++) {
+
+    let dateValue = document.getElementById(`date-completed-${[i+1]}`).innerHTML;
+
+    let dateConvert = Date.parse(dateValue)
+
+    let dateFinal = ""
+
+    dateFinal = new Date(dateConvert).toLocaleDateString('en-GB', dayFormat);
+
+    document.getElementById(`date-completed-${[i+1]}`).innerHTML = 'Date completed:' + ' ' + `<strong>` + dateFinal + `</strong>`;
+};

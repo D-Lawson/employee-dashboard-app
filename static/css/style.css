@@ -187,6 +187,12 @@ input:-webkit-autofill:active{
   width: 60%;
 }
 
+@media (max-width: 690px){
+  .form-width{
+    width: 100%;
+  }
+}
+
 form .row{
   margin-bottom: 10px;
 }
@@ -195,11 +201,6 @@ form .row{
   background-color: #933e55;
 }
 
-@media (max-width: 690px){
-  .form-width{
-    width: 90%;
-  }
-}
 
 .form-style{
   background-color: transparent;
@@ -292,6 +293,10 @@ form .row{
   padding-bottom: 45px;
 }
 
+.relative-container{
+  position: relative;
+}
+
 .completed {
   height: 20px;
   background-color: #3e76af;
@@ -334,6 +339,15 @@ form .row{
     bottom: 6px;
     white-space: nowrap;
   }
+}
+
+.completed-date{
+  float: right;
+  position: absolute;
+  right: -4px;
+  bottom: 4px;
+  white-space: nowrap;
+  font-size: 0.77rem;
 }
 
 .activity-name {
