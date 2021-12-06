@@ -356,6 +356,26 @@ form .row{
   font-size: 0.77rem;
 }
 
+.completed-date-user{
+  float: right;
+  position: absolute;
+  right: 12px;
+  bottom: 31px;
+  white-space: nowrap;
+  font-size: 0.77rem;
+}
+
+@media (max-width: 690px){
+  .completed-date-user {
+    float: right;
+    position: absolute;
+    right: 154px;
+    bottom: 6px;
+    white-space: nowrap;
+    font-size: 0.77rem;
+  }
+}
+
 .activity-name {
   float: left;
   position: absolute;

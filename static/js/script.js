@@ -60,7 +60,7 @@ var dayFormat = {
     day: 'numeric'
 };
 
-date_number = $('.assigned-to').length;
+date_number = $('.due-by').length;
 for (let i = 0; i < date_number; i++) {
 
     let dateValue = document.getElementById(`date-completed-${[i+1]}`).innerHTML;
