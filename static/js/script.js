@@ -3,7 +3,7 @@
 */
 
 $(document).ready(function () {
-    $( "#activity-form" ).hide();
+    $("#activity-form").hide();
     $('.sidenav').sidenav();
     $('.collapsible').collapsible();
     $("select").formSelect();
@@ -11,12 +11,14 @@ $(document).ready(function () {
         format: "dd mmmm, yyyy",
         yearRange: 3,
         showClearBtn: true,
-        i18n: {done: "Select"}
+        i18n: {
+            done: "Select"
+        }
     });
-    $('#add-activity').click(function() {
+    $('#add-activity').click(function () {
         $('#activity-form').fadeToggle(800);
-    })
     });
+});
 
 
 /*
@@ -31,21 +33,21 @@ for (i = 0; i < number; i++) {
     var varDate = new Date(date);
     var today = new Date();
 
-    Date.prototype.addDays = function(days) {
+    Date.prototype.addDays = function (days) {
         var date = new Date(this.valueOf());
         date.setDate(date.getDate() + days);
         return date;
     }
 
-    if(varDate <= today) {
+    if (varDate <= today) {
         document.getElementById(`conditional-bg-${[i+1]}`).innerHTML = "warning";
         document.getElementById(`conditional-bg-${[i+1]}`).style.color = "red";
-        } else if (varDate < today.addDays(7)) {
-            document.getElementById(`conditional-bg-${[i+1]}`).style.color = "red";
-        } else if (varDate < today.addDays(14)) {
-            document.getElementById(`conditional-bg-${[i+1]}`).style.color = "orange";
-        }
-    };
+    } else if (varDate < today.addDays(7)) {
+        document.getElementById(`conditional-bg-${[i+1]}`).style.color = "red";
+    } else if (varDate < today.addDays(14)) {
+        document.getElementById(`conditional-bg-${[i+1]}`).style.color = "orange";
+    }
+}
 
 
 /*
@@ -59,15 +61,13 @@ var dayFormat = {
 };
 
 date_number = $('.assigned-to').length;
-for (i = 0; i < date_number; i++) {
+for (let i = 0; i < date_number; i++) {
 
     let dateValue = document.getElementById(`date-completed-${[i+1]}`).innerHTML;
 
-    let dateConvert = Date.parse(dateValue)
+    let dateConvert = Date.parse(dateValue);
 
-    let dateFinal = ""
-
-    dateFinal = new Date(dateConvert).toLocaleDateString('en-GB', dayFormat);
+    let dateFinal = new Date(dateConvert).toLocaleDateString('en-GB', dayFormat);
 
     document.getElementById(`date-completed-${[i+1]}`).innerHTML = 'Date completed:' + ' ' + `<strong>` + dateFinal + `</strong>`;
-};
+}

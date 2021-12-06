@@ -28,15 +28,12 @@ def login():
     """
     Authenticates user and validates the hashed password
     """
-    if is_admin_authenticated():
-        return redirect(url_for("admin_dashboard"))
-    elif check_authentication():
-        return redirect(url_for("dashboard"))
+    redirect_to_dashboard_if_authenticated()
 
     if request.method == "POST":
-        check_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
         current_username = request.form.get("username").lower()
+        check_user = mongo.db.users.find_one(
+            {"username": current_username})
         current_password = request.form.get("password")
 
         if check_user and current_username == "admin":
@@ -67,6 +64,8 @@ def register():
     """
     Registers new user into db and generates hashed p/w
     """
+    redirect_to_dashboard_if_authenticated()
+
     if request.method == "POST":
         current_user = request.form.get("username").lower()
         check_user = mongo.db.users.find_one(
@@ -97,8 +96,10 @@ def logout():
     """
     Logs the user out of the system
     """
-    flash("Sucessfully logged out from dashboard")
-    session.pop("user")
+    if is_authenticated():
+        flash("Sucessfully logged out from dashboard")
+        session.pop("user")
+
     return redirect(url_for("login"))
 
 
@@ -108,6 +109,9 @@ def dashboard():
     """
     Renders the user's dashboard, retrieves/sorts all uncompleted activities
     """
+    if not is_authenticated():
+        return redirect(url_for("login"))
+
     current_user = session["user"]
 
     activities = list(mongo.db.activities.find(
@@ -129,6 +133,10 @@ def admin_dashboard():
     """
     Renders the admin dashboard including all uncompleted activities
     """
+
+    if not is_admin_authenticated():
+        return redirect(url_for("login"))
+
     if request.method == "POST":
         datestring = request.form.get("target_date")
         unixdate = datetime.strptime(datestring, "%d %B, %Y").date()
@@ -161,6 +169,10 @@ def edit_activity(activity_id):
     """
     Edits the selected activity ID and updates db
     """
+
+    if not is_admin_authenticated():
+        return redirect(url_for("login"))
+
     if request.method == "POST":
         datestring = request.form.get("target_date")
         unixdate = datetime.strptime(datestring, "%d %B, %Y").date()
@@ -191,22 +203,12 @@ def delete_activity(activity_id):
     """
     Deletes the selected activity ID from db.
     """
+    if not is_admin_authenticated():
+        return redirect(url_for("login"))
+
     mongo.db.activities.remove({"_id": ObjectId(activity_id)})
     flash("Activity Deleted")
     return redirect(url_for("admin_dashboard"))
-
-# Cancel edit activity
-@app.route("/cancel")
-def cancel():
-    """
-    Cancels the edit and redirects to the dashboard
-    """
-    if is_admin_authenticated():
-        return redirect(url_for("admin_dashboard"))
-    elif check_authentication():
-        return redirect(url_for("dashboard"))
-
-    return render_template("login.html")
 
 
 #  Mark activity as completed
@@ -215,6 +217,9 @@ def completed(activity_id):
     """
     Marks the selected activity ID as completed in db
     """
+    if not is_authenticated():
+        return redirect(url_for("login"))
+
     current_user = session["user"]
 
     completed_activity = {"completed": "yes"}
@@ -227,7 +232,7 @@ def completed(activity_id):
         {"_id": ObjectId(activity_id)}, {"$set": completed_activity})
 
     mongo.db.activities.update_one(
-        {"_id": ObjectId(activity_id)}, {"$set":{"date_completed": combine}})
+        {"_id": ObjectId(activity_id)}, {"$set": {"date_completed": combine}})
 
     flash("Activity marked as complete")
 
@@ -259,24 +264,21 @@ def user_activity_history():
     """
     Renders all completed activities for the active user
     """
+    if not is_authenticated():
+        return redirect(url_for("login"))
+
     current_user = session["user"]
+    activities = list(mongo.db.activities.find(
+        {"username": current_user, "completed": "yes"}).sort(
+            "target_date", 1))
 
-    if not is_admin_authenticated():
-        activities = list(mongo.db.activities.find(
-            {"username": current_user, "completed": "yes"}).sort(
-                "target_date", 1))
-        username = mongo.db.users.find_one(
-            {"username": current_user})["username"]
-    if current_user:
-        return render_template(
-            "user_activity_history.html",
-            activities=activities, username=username)
-
-    return redirect(url_for("login"))
+    return render_template(
+        "user_activity_history.html",
+        activities=activities, username=current_user)
 
 
 # Other functions
-def check_authentication():
+def is_authenticated():
     """
     Checks the active user
     """
@@ -287,7 +289,17 @@ def is_admin_authenticated():
     """
     Checks whether the active user is the admin
     """
-    return check_authentication() and session['user'] == "admin"
+    return is_authenticated() and session['user'] == "admin"
+
+
+def redirect_to_dashboard_if_authenticated():
+    """
+    Redirects to user or admin dashboard if authenticated
+    """
+    if is_admin_authenticated():
+        return redirect(url_for("admin_dashboard"))
+    elif is_authenticated():
+        return redirect(url_for("dashboard"))
 
 
 if __name__ == "__main__":
