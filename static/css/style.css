@@ -53,10 +53,16 @@ header, main, footer {
   color: azure;
 }
 
-.container {
+.container{
   margin: 0 auto;
   max-width: 1280px;
   width: 90%;
+}
+
+@media (max-width: 690px){
+  .container {
+    width: 95%;
+  }
 }
 
 .no-margin{
