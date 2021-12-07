@@ -18,6 +18,10 @@ h1, h2, h3, h4, h5{
   font-family: 'Raleway', sans-serif;
 }
 
+label{
+  color: rgb(44, 40, 40) !important;
+}
+
 .main-style{
   margin-top: 50px !important;
 }
@@ -48,7 +52,7 @@ header, main, footer {
   bottom: 56px;
   left: 23px;
   font-size: 22px;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  text-shadow: 0px 3px 3px rgba(255,255,255,0.5);
   font-family: 'Raleway';
   color: azure;
 }
@@ -170,7 +174,7 @@ nav .sidenav-trigger i {
 }
 
 .submit-fill{
-  background-color: #2f96a1;
+  background-color: #12818d;
   border-radius: 2em !important;
 }
 
@@ -444,7 +448,7 @@ form .row{
 }
 
 .edit {
-  color: #ef2121;
+  color: #be1d1d;
   background-color: transparent;
   font-weight: 500;
   float: left;
