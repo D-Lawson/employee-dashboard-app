@@ -305,22 +305,46 @@ form .row{
 
 .completed {
   height: 20px;
-  background-color: #3e76af;
+  background-color: #ffffff;
+  border: 2px solid;
+  border-radius: 10px;
+  color: black;
+  border-color:green !important;
   font-size: x-small;
   float: right;
   position: absolute;
-  right: 0px;
-  bottom: 10px;
+  right: 15px;
+  bottom: 31px;
   white-space: nowrap;
+
+}
+
+@media (max-width: 690px){
+  .completed {
+    border: 1px solid;
+    right: 156px;
+    bottom: 5px;
+    font-size: 6px;
+    height: 16px;
+  }
 }
 
 .completed:hover {
-  background-color: #5d94ca !important;
+  background-color: #f7f7f7 !important;
+  color: darkgreen !important;
+  border-color:green !important;
 }
   
 .completed-text {
   position: relative;
-  bottom: 6px;
+  bottom: 8px;
+}
+
+@media (max-width: 690px){
+  .completed-text {
+    position: relative;
+    bottom: 9px;
+  }
 }
 
 .submit-text {
