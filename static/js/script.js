@@ -60,14 +60,18 @@ var dayFormat = {
     day: 'numeric'
 };
 
-date_number = $('.due-by').length;
-for (let i = 0; i < date_number; i++) {
+if (window.location.href.indexOf("history") > -1) {
 
-    let dateValue = document.getElementById(`date-completed-${[i+1]}`).innerHTML;
+    date_number = $('.due-by').length;
+    console.log(date_number)
+    for (let i = 0; i < date_number; i++) {
 
-    let dateConvert = Date.parse(dateValue);
+        let dateValue = document.getElementById(`date-completed-${[i+1]}`).innerHTML;
 
-    let dateFinal = new Date(dateConvert).toLocaleDateString('en-GB', dayFormat);
+        let dateConvert = Date.parse(dateValue);
 
-    document.getElementById(`date-completed-${[i+1]}`).innerHTML = 'Date completed:' + ' ' + `<strong>` + dateFinal + `</strong>`;
+        let dateFinal = new Date(dateConvert).toLocaleDateString('en-GB', dayFormat);
+
+        document.getElementById(`date-completed-${[i+1]}`).innerHTML = 'Date completed:' + ' ' + `<strong>` + dateFinal + `</strong>`;
+    }
 }
