@@ -28,33 +28,36 @@ def login():
     """
     Authenticates user and validates the hashed password
     """
-    redirect_to_dashboard_if_authenticated()
+    if is_admin_authenticated():
+        return redirect(url_for("admin_dashboard"))
+    elif is_authenticated():
+        return redirect(url_for("dashboard"))
+    else:
+        if request.method == "POST":
+            current_username = request.form.get("username").lower()
+            check_user = mongo.db.users.find_one(
+                {"username": current_username})
+            current_password = request.form.get("password")
 
-    if request.method == "POST":
-        current_username = request.form.get("username").lower()
-        check_user = mongo.db.users.find_one(
-            {"username": current_username})
-        current_password = request.form.get("password")
-
-        if check_user and current_username == "admin":
-            if check_password_hash(
-                    check_user["password"], current_password):
-                session["user"] = current_username
-                return redirect(url_for("admin_dashboard"))
+            if check_user and current_username == "admin":
+                if check_password_hash(
+                        check_user["password"], current_password):
+                    session["user"] = current_username
+                    return redirect(url_for("admin_dashboard"))
+                else:
+                    flash("The Password and/or Username is incorrect.")
+                    return redirect(url_for("login"))
+            elif check_user and current_username != "admin":
+                if check_password_hash(
+                        check_user["password"], current_password):
+                    session["user"] = current_username
+                    return redirect(url_for("dashboard"))
+                else:
+                    flash("The Password and/or Username is incorrect.")
+                    return redirect(url_for("login"))
             else:
                 flash("The Password and/or Username is incorrect.")
                 return redirect(url_for("login"))
-        elif check_user and current_username != "admin":
-            if check_password_hash(
-                    check_user["password"], current_password):
-                session["user"] = current_username
-                return redirect(url_for("dashboard"))
-            else:
-                flash("The Password and/or Username is incorrect.")
-                return redirect(url_for("login"))
-        else:
-            flash("The Password and/or Username is incorrect.")
-            return redirect(url_for("login"))
     return render_template("login.html")
 
 
@@ -64,28 +67,31 @@ def register():
     """
     Registers new user into db and generates hashed p/w
     """
-    redirect_to_dashboard_if_authenticated()
-
-    if request.method == "POST":
-        current_user = request.form.get("username").lower()
-        check_user = mongo.db.users.find_one(
-            {"username": current_user})
-
-        if check_user:
-            flash("This username is already registered")
-            return redirect(url_for("register"))
-
-        create_user = {
-            "username": current_user,
-            "password": generate_password_hash(request.form.get("password"))
-        }
-        mongo.db.users.insert_one(create_user)
-
-        session["user"] = current_user
-        flash(
-            """Thank you for registering.  You are now signed in
-            to your personal dashboard.""")
+    if is_admin_authenticated():
+        return redirect(url_for("admin_dashboard"))
+    elif is_authenticated():
         return redirect(url_for("dashboard"))
+    else:
+        if request.method == "POST":
+            current_user = request.form.get("username").lower()
+            check_user = mongo.db.users.find_one(
+                {"username": current_user})
+
+            if check_user:
+                flash("This username is already registered")
+                return redirect(url_for("register"))
+
+            create_user = {
+                "username": current_user,
+                "password": generate_password_hash(request.form.get("password"))
+            }
+            mongo.db.users.insert_one(create_user)
+
+            session["user"] = current_user
+            flash(
+                """Thank you for registering.  You are now signed in
+                to your personal dashboard.""")
+            return redirect(url_for("dashboard"))
 
     return render_template("register.html")
 
@@ -134,28 +140,31 @@ def admin_dashboard():
     Renders the admin dashboard including all uncompleted activities
     """
 
-    if request.method == "POST":
-        datestring = request.form.get("target_date")
-        unixdate = datetime.strptime(datestring, "%d %B, %Y").date()
-        unixtime = datetime.now().time()
-        combine = datetime.combine(unixdate, unixtime)
-        print(combine)
-        activity = {
-            "username": request.form.get("assign_to"),
-            "activity_name": request.form.get("activity_name"),
-            "activity_description": request.form.get("activity_description"),
-            "target_date": combine,
-            "date_string": datestring,
-            "completed": "no",
-        }
-        mongo.db.activities.insert_one(activity)
-        flash("Activity successfully assigned to user")
-        return redirect(url_for("admin_dashboard"))
+    if not is_admin_authenticated():
+        return redirect(url_for("login"))
+    elif is_admin_authenticated():
+        if request.method == "POST":
+            datestring = request.form.get("target_date")
+            unixdate = datetime.strptime(datestring, "%d %B, %Y").date()
+            unixtime = datetime.now().time()
+            combine = datetime.combine(unixdate, unixtime)
+            print(combine)
+            activity = {
+                "username": request.form.get("assign_to"),
+                "activity_name": request.form.get("activity_name"),
+                "activity_description": request.form.get("activity_description"),
+                "target_date": combine,
+                "date_string": datestring,
+                "completed": "no",
+            }
+            mongo.db.activities.insert_one(activity)
+            flash("Activity successfully assigned to user")
+            return redirect(url_for("admin_dashboard"))
 
-    activities = list(mongo.db.activities.find(
-        {"completed": "no"}).sort("target_date", 1))
+        activities = list(mongo.db.activities.find(
+            {"completed": "no"}).sort("target_date", 1))
 
-    users = mongo.db.users.find().sort("username", 1)
+        users = mongo.db.users.find().sort("username", 1)
     return render_template(
         "admin_dashboard.html", users=users, activities=activities)
 
@@ -287,16 +296,6 @@ def is_admin_authenticated():
     Checks whether the active user is the admin
     """
     return is_authenticated() and session['user'] == "admin"
-
-
-def redirect_to_dashboard_if_authenticated():
-    """
-    Redirects to user or admin dashboard if authenticated
-    """
-    if is_admin_authenticated():
-        return redirect(url_for("admin_dashboard"))
-    elif is_authenticated():
-        return redirect(url_for("dashboard"))
 
 
 if __name__ == "__main__":
