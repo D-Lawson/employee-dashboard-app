@@ -83,7 +83,8 @@ def register():
 
             create_user = {
                 "username": current_user,
-                "password": generate_password_hash(request.form.get("password"))
+                "password": generate_password_hash(
+                    request.form.get("password"))
             }
             mongo.db.users.insert_one(create_user)
 
@@ -152,7 +153,8 @@ def admin_dashboard():
             activity = {
                 "username": request.form.get("assign_to"),
                 "activity_name": request.form.get("activity_name"),
-                "activity_description": request.form.get("activity_description"),
+                "activity_description": request.form.get(
+                    "activity_description"),
                 "target_date": combine,
                 "date_string": datestring,
                 "completed": "no",

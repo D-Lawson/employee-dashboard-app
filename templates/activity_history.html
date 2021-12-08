@@ -6,26 +6,29 @@
 <!-- RENDER ACTIVITY HISTORY -->
 
 {% if activities | length > 0 %}
-  {% for activity in activities %}
-  <div class="row">
-      <ul class="col collapsible s12 heading-top no-margin activity-header">
-        <li>
-            <div class="collapsible-header header-size header-fill">
-                <i class="material-icons green-text time-icon-a">check</i>
-                <span class="activity-name-a"><strong>{{ activity.activity_name }}</strong></span>
-                <span class="right-align activity-margin assigned-to">Assigned to: <strong> {{ activity.username }}</strong> </span>
-                <span class="right-align activity-margin due-by">Due by: <strong> {{ activity.date_string }}</strong><span><i class="material-icons arrow">arrow_downward</i></span></span>
-            </div>
-            <div class="collapsible-body relative-container">
-                <span id="date-completed-{{ loop.index }}" class="right-align activity-margin completed-date">{{ activity.date_completed }}</span>
-                <span><strong>{{ activity.activity_description }}</strong></span></div>
-                <script onload='dateToString();'></script>
-        </li>
-      </ul>
-  </div>
-  {% endfor %}
+{% for activity in activities %}
+<div class="row">
+  <ul class="col collapsible s12 heading-top no-margin activity-header">
+    <li>
+      <div class="collapsible-header header-size header-fill">
+        <i class="material-icons green-text time-icon-a">check</i>
+        <span class="activity-name-a"><strong>{{ activity.activity_name }}</strong></span>
+        <span class="right-align activity-margin assigned-to">Assigned to: <strong> {{ activity.username }}</strong>
+        </span>
+        <span class="right-align activity-margin due-by">Due by: <strong> {{ activity.date_string }}</strong><span><i
+              class="material-icons arrow">arrow_downward</i></span></span>
+      </div>
+      <div class="collapsible-body relative-container">
+        <span id="date-completed-{{ loop.index }}"
+          class="right-align activity-margin completed-date">{{ activity.date_completed }}</span>
+        <span><strong>{{ activity.activity_description }}</strong></span></div>
+      <script onload='dateToString();'></script>
+    </li>
+  </ul>
+</div>
+{% endfor %}
 {% else %}
-    <h5 class="center-align">You currently have no completed activities</h5>
+<h5 class="center-align">You currently have no completed activities</h5>
 {% endif %}
 
 {% endblock %}

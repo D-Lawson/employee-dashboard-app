@@ -24,31 +24,33 @@
         <ul id="sidenav-mobile" class="sidenav sidenav-fixed">
             <li>
                 <div class="user-view nav-mobile">
-                    <img class="circle" alt="logo image metallic texture" src="{{ url_for('static', filename='images/metal-textures.jpg') }}">
+                    <img class="circle" alt="logo image metallic texture"
+                        src="{{ url_for('static', filename='images/metal-textures.jpg') }}">
                     <span class="logo-style">Employee Dashboard</span>
                 </div>
             </li>
             {% if not session.user | lower %}
-                <li><a class="white-text" href="{{ url_for('login') }}"><i
-                            class="white-text material-icons">vpn_key</i>Log
-                        in</a>
-                </li>
+            <li><a class="white-text" href="{{ url_for('login') }}"><i class="white-text material-icons">vpn_key</i>Log
+                    in</a>
+            </li>
             {% endif %}
-                <li>
+            <li>
                 <div class="divider"></div>
-                </li>
+            </li>
             {% if session.user | lower == username %}
-                <li><a href="{{ url_for('dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
-                <li><a href="{{ url_for('user_activity_history') }}" class="white-text waves-effect">Activity history</a></li>
+            <li><a href="{{ url_for('dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
+            <li><a href="{{ url_for('user_activity_history') }}" class="white-text waves-effect">Activity history</a>
+            </li>
             {% elif session.user|lower == "admin"|lower %}
-                <li><a href="{{ url_for('admin_dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
-                <li><a href="{{ url_for('activity_history') }}" class="white-text waves-effect">Activity history</a></li>
+            <li><a href="{{ url_for('admin_dashboard') }}" class="white-text waves-effect">Dashboard</a></li>
+            <li><a href="{{ url_for('activity_history') }}" class="white-text waves-effect">Activity history</a></li>
             {% else %}
-                <li><a class="white-text" href="{{ url_for('register') }}">Register</a></li>
-                <li><a href="#!" class="white-text waves-effect">Problems logging in? Click here.</a></li>
+            <li><a class="white-text" href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="mailto:tech.support@e-dashboard.com.org" class="white-text waves-effect">Problems logging in?
+                    Click here.</a></li>
             {% endif %}
             {% if session.user|lower %}
-                <li><a class="white-text log" href="{{ url_for('logout') }}">Log out</a></li>
+            <li><a class="white-text log" href="{{ url_for('logout') }}">Log out</a></li>
             {% endif %}
         </ul>
     </header>
@@ -59,9 +61,9 @@
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
-            <div class="row flashes flash-style">
-                <h5 class="lime lighten-3 black-text center-align flash-text">{{ message }}</h5>
-            </div>
+        <div class="row flashes flash-style">
+            <h5 class="lime lighten-3 black-text center-align flash-text">{{ message }}</h5>
+        </div>
         {% endfor %}
         {% endif %}
         {% endwith %}
