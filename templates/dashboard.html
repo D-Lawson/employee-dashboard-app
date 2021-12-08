@@ -11,8 +11,8 @@
     <ul class="col collapsible s12 heading-top no-margin activity-header">
       <li>
         <div class="collapsible-header header-fill">
-          <i id="conditional-bg-{{ loop.index }}" class="material-icons">schedule</i>
-          <span class="activity-name-a"><strong>{{ activity.activity_name }}</strong></span>
+          <i id="conditional-bg-{{ loop.index }}" class="material-icons time-icon-b">schedule</i>
+          <span class="activity-name-b"><strong>{{ activity.activity_name }}</strong></span>
           <span class="right-align activity-margin due-by">Due by:<strong> {{ activity.date_string }}</strong><span><i class="material-icons arrow">arrow_downward</i></span></span>
           <a href="{{ url_for('completed', activity_id=activity._id) }}" class="btn-small completed"><span class="completed-text">Mark as completed</span></a></span>
           <span id="date-target-{{ loop.index }}" class="hide">{{ activity.target_date }}</span>
