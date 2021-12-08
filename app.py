@@ -134,9 +134,6 @@ def admin_dashboard():
     Renders the admin dashboard including all uncompleted activities
     """
 
-    if not is_admin_authenticated():
-        return redirect(url_for("login"))
-
     if request.method == "POST":
         datestring = request.form.get("target_date")
         unixdate = datetime.strptime(datestring, "%d %B, %Y").date()

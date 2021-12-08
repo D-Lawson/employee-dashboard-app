@@ -13,7 +13,7 @@
                 <select id="assign_to" name="assign_to" class="validate" required>
                     {% for user in users %}
                     {% if user.username == activity.username %}
-                    <option value="{{ user.username }}"selected>{{ user.username }}</option>
+                    <option value="{{ user.username }}" selected>{{ user.username }}</option>
                     {% else %}
                     <option value="{{ user.username }}">{{ user.username }}</option>
                     {% endif %}

@@ -25,8 +25,8 @@ $(document).ready(function () {
     Conditional formatting for overdue, due within 1 week, due within 2 weeks
 */
 
-number = $('.hide').length;
-for (i = 0; i < number; i++) {
+var number = $('.hide').length;
+for (let i = 0; i < number; i++) {
 
     var dateid = `date-target-${[i+1]}`;
     var date = document.getElementById(dateid).innerHTML;
@@ -37,7 +37,7 @@ for (i = 0; i < number; i++) {
         var date = new Date(this.valueOf());
         date.setDate(date.getDate() + days);
         return date;
-    }
+    };
 
     if (varDate <= today) {
         document.getElementById(`conditional-bg-${[i+1]}`).innerHTML = "warning";
@@ -62,8 +62,7 @@ var dayFormat = {
 
 if (window.location.href.indexOf("history") > -1) {
 
-    date_number = $('.due-by').length;
-    console.log(date_number)
+    var date_number = $('.due-by').length;
     for (let i = 0; i < date_number; i++) {
 
         let dateValue = document.getElementById(`date-completed-${[i+1]}`).innerHTML;
