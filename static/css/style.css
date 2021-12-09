@@ -113,6 +113,30 @@ header, main, footer {
   font-size: large;
 }
 
+.btn1{
+  text-decoration: none; /* Obtained from Materialize btn to prevent background color change on load */
+  color: #fff;
+  background-color: #ffffff;
+  text-align: center;
+  letter-spacing: .5px;
+  -webkit-transition: background-color .2s ease-out;
+  transition: background-color .2s ease-out;
+  cursor: pointer;
+  font-size: 14px;
+  outline: 0;
+  border: none;
+  border-radius: 2px;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 16px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+
 /* Nav and sidenav styling */
 
 .nav-style{
@@ -427,13 +451,13 @@ form .row{
   
 .completed-text {
   position: relative;
-  bottom: 8px;
+  bottom: 10px;
 }
 
 @media (max-width: 690px){
   .completed-text {
     position: relative;
-    bottom: 9px;
+    bottom: 11px;
   }
 }
 

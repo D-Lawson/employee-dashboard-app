@@ -6,7 +6,7 @@
 <!-- ASSIGN NEW ACTIVITY TO USER -->
 
 <div class="row center-align form-margin">
-    <a id="add-activity" href="#!" class="btn-small waves-effect add-activity"> Assign new activity to user</a>
+    <a id="add-activity" href="#!" class="btn1 waves-effect add-activity"> Assign new activity to user</a>
 </div>
 <div id="activity-form" class="row form-width form-style z-depth-3">
     <form class="col s12" method="POST">
@@ -88,7 +88,7 @@
             <li>
                 <div class="collapsible-header header-fill">
                     <a href="{{ url_for('edit_activity', activity_id=activity._id) }}"
-                        class="btn-small edit hide-on-med-and-down">Edit</a>
+                        class="btn1 edit hide-on-med-and-down">Edit</a>
                     <i id="conditional-bg-{{ loop.index }}" class="material-icons time-icon">schedule</i>
                     <span
                         class="activity-name length-size-{{ loop.index }}"><strong>{{ activity.activity_name }}</strong></span>
