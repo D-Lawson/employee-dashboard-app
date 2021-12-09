@@ -4,7 +4,8 @@
 URL to the current deployed application:  [Employee Dashboard App](http://staff-dashboard.herokuapp.com/)
 
 # Employee Dashboard Application
-This application is intended to provide employers with a tool to easily assign activities/tasks to the workforce and enable effective monitoring of the activities once assigned.   Activities are assigned to employee accounts so that employees can view a customised dashboard which presents all the activities that have been assigned to them.  This allows each employee to prioritise effectively and helps them to keep track of the work that has been delegated to them.   
+This application is intended to provide employers with a tool to easily assign activities/tasks to the workforce and enable effective monitoring of the activities once assigned.   Activities are assigned to employee accounts so that employees can view a customised dashboard which presents all the activities that have been assigned to them.  This allows each employee to prioritise effectively and helps them to keep track of the work that has been delegated to them.
+
 The administrator account has its own dashboard where activities can be assigned and modified.   The administrator account can easily and intuitively monitor the activities of all employees, keep track of deadlines and also view which activities have been completed/signed off.   
 
 ----
@@ -32,6 +33,7 @@ The owner is to be any manager, team/project leader who wishes to have the abili
 1.  As a manager of my team I would like to be able to see an overview of all the work completed so that I can confirm that activities have been completed and keep track of when they were completed. 
 
 ## The Strategy Plane
+
 The application needs to be highly intuitive, and task focused.  The intention of this application is to make the task of managing work activities as efficient as possible.  This will require that the user is presented with the required information without having to unduly navigate to find it and is able to interact with the information an intuitive way.   The application should make it seamless for employees to prioritise the tasks assigned, taking the deadlines into account.  It should also allow the manager to easily monitor the activities that are due imminently and also further ahead.  The manager should be able to efficiently assign new activities and modify existing ones. 
 Application user objectives:
 * View all activities that have been assigned to them with attention to deadlines to enable prioritisation.
@@ -42,6 +44,7 @@ Application owner objectives:
 * To increase the productivity of team members by providing them with an efficient way of keeping track of the work that has been assigned to them.  Enabling them to prioritise and plan their work effectively and easily access all the relevant details.
 * Increase the productivity of managers by providing them with a tool to assign and monitor the work of employees.
 * Serve as a continual record of activities for business analytics purposes
+
 ## The Scope Plane
 
 These features are to be included as priorities:
@@ -92,6 +95,7 @@ Here are some of the styling rules that has been defined to date:
 **Segoe UI** font to be used for side-nav links and content text throughout pages
 
 ### Colours
+
 *	Hex #484848 has been identified as a suitable color for the sidenav and top nav elements
 *	Hex #278b7d has been identified as suitable for the footer element
 *	Hex #2f96a1 has been identified as suitable for primary buttons
@@ -100,8 +104,10 @@ Here are some of the styling rules that has been defined to date:
 ### Buttons
 
 Generic Materialize buttons have been deemed suitable, providing that the styling is overridden to complement the theme.
+
 ### Data schema
-Here is the data schema for this application.  It’s relatively straight forward and requires two collections, with the username acting as a relationship between the two collections.  
+
+Here is the data schema for this application.  It’s relatively straight forward and requires two collections, with the username acting as a relationship between the two collections.  The 'users' collection stores two data types, object ID for the ID, and text string for two fields, one for username and the other to contain the hashed password.  The 'activities' collection also contains the username field, this will be used to define the relationship between the tables and to enable personalised activities to be presented to the active username.   The activities collection contains a combination of three data types, object ID, text string and date field types.   
 
 <img src="static/images/readme/data-schema.png"  width="800"/>
 
@@ -161,24 +167,28 @@ Here is the data schema for this application.  It’s relatively straight forwar
 # Testing
 
 ## Testing against user stories:
-1.  As an employee I would like to view any activities that have been assigned to me by my manager.  I would like if it helped me to prioritise my work and keep track of the deadlines set.
-- The employee dashboard contains all activities assigned to the user that are yet to be completed.  They are sorted in date order showing the ones due soonest at the top to assist with prioritising work and planning.   The status icons reflect the due date to emphasise the ones that are overdue, due within a week or due within 2 weeks.  Each activity can be expanded to show additional details by clicking anywhere on the bar.
 
-    <img src="static/images/readme/employee-dashboard.png"  width="500"/>
+1.  As an employee I would like to view any activities that have been assigned to me by my manager.  I would like if it helped me to prioritise my work and keep track of the deadlines set.  I would also like to be able to search activities to speed things up if I want to find it quickly.
+
+- The employee dashboard contains all activities assigned to the user that are yet to be completed.  They are sorted in date order showing the ones due soonest at the top to assist with prioritising work and planning.   The status icons reflect the due date to emphasise the ones that are overdue, due within a week or due within 2 weeks.  Each activity can be expanded to show additional details by clicking anywhere on the bar.  The search tool is available on both the dashboard and the activity history pages.
+
+<img src="static/images/readme/employee-dashboard.png"  width="500"/>
 
 1.  As an employee I would like to be able to sign off any activities that I have completed and also view all the activities that I have completed for future reference. 
+
 - Employees can easily sign off an activity by clicking on the prominent ‘Mark as completed’ button (see image above).    This allows them to mark the activity as completed so that it is no longer displayed on their dashboard.    The activity is then transferred to the activity history, where the user can view a record of all completed activities, along with the dates that they were completed. 
 
-    <img src="static/images/readme/employee-activity-history.png"  width="500"/>
+<img src="static/images/readme/employee-activity-history.png"  width="500"/>
 
-1.  As a manager of my team I would like to be able to easily assign activities to my staff for their attention.   I would like to be able to set deadlines for the work to be completed and be able to easily monitor their progress by keeping track of the dates set and the work completed.   I would also like to be able to search for a user or activity.
-- The admin dashboard features a prominent ‘Assign new activity to user’ button at the top of the page, this toggles down a form to instantly assign a new task to a user of their choosing.  The dashboard contains a list of all outstanding activities which details whom the activity has been assigned to, the dates due for easy monitoring of the activities due. 
+1.  As a manager of my team I would like to be able to easily assign activities to my staff for their attention.   I would like to be able to set deadlines for the work to be completed and be able to easily monitor their progress by keeping track of the dates set and the work completed.   I would also like to be able to quickly search for a user or activity.
 
-    <img src="static/images/readme/admin-dashboard.png"  width="500"/>
+- The admin dashboard features a prominent ‘Assign new activity to user’ button at the top of the page, this toggles down a form to instantly assign a new task to a user of their choosing.  The dashboard contains a list of all outstanding activities which details whom the activity has been assigned to, the dates due for easy monitoring of the activities due. The admin or user can search all activities whether that is uncompleted ones on the dashboard, or completed ones in the activity history.
 
+<img src="static/images/readme/admin-dashboard.png"  width="500"/>
 
 
 1.  As a manager of my team I would like to be able to amend activities as and when needed.  This is so that I can provide additional details, change dates or re-allocate to different members of the team.   I would also like the ability to delete or mark the activities as completed.
+
 - The list of activities that are displayed on the admin dashboard contain a prominent ‘Edit’ button to allow the administrator to amend a chosen activity.  This pre-populates the details from the chosen activity ID into the form for editing.  They are able to re-assign the activity to a different user, update details or change the date.   Underneath the form the administrator can choose to update the activity, delete the activity, complete the activity or press cancel to return to the dashboard. 
 
 <img src="static/images/readme/admin-activity-edit.png"  width="500"/>
@@ -187,21 +197,26 @@ Here is the data schema for this application.  It’s relatively straight forwar
 
 
 1.  As a manager of my team I would like to be able to see an overview of all the work completed so that I can confirm that activities have been completed and keep track of when they were completed. 
-- The administrator can select the activity history option from the side-nav to view all completed activities, again in date order.     The administrator can view who the activity was completed by, when it was due, and when it was completed.   
+- The administrator can select the activity history option from the side-nav to view all completed activities, again in date order.  The administrator can view who the activity was completed by, when it was due, and when it was completed.   
 
-    <img src="static/images/readme/admin-activity-history.png"  width="500"/>
+<img src="static/images/readme/admin-activity-history.png"  width="500"/>
 
 ## Manual testing procedures
 
 Here are each of the steps that I took to test the application:
 
 ### Application Tested on different browsers at different screen widths for responsiveness – Chrome, Chrome for Android, Samsung Internet, Edge, Firefox
+
 As part of my standard routine when testing applications, I will test on various browsers and devices.  Once I was satisfied with the CSS and the media queries on my development browser (Chrome desktop) I proceeded to test on different browsers at different window widths using Chrome, Edge and Firefox.  I was satisfied that the responsive design was consistent across all three.  I then tested using the chrome devtools responsive view tool to test across various devices and screen sizes.   Again I was satisfied that the display was consistent with my intentions.    I then tested on my mobile phone and a tablet device using Chrome mobile and Samsung mobile browsers.   I am satisfied that there are no unexpected behaviours across these browsers and devices.   
+
 ### Testing nav-links
+
 The nav links made use of Jinja templates to determine which links to display.  When signed out only the login, register, and ‘problems?’ links appear to the user.  When signed in to the admin dashboard the relevant routing is applied to ‘dashboard’, and ‘activity history’, displaying the links for the admin templates.  When signed in as a general user, the dashboard and activity history links are the relevant ones which have been set up for general users.   I’m satisfied that the links display as intended, only giving access to the templates that the users are authorised to view.   The log out link calls the logout route, pops the session user out of memory and redirects them to the login screen.  The above links were tested on multiple different accounts.
+
 ### Testing form functionalities for login, register, add activity, and edit activity.   
 
 I tested each form as intended, adhering to the validation rules.  Each form was developed using the same code snippets, adapted to the different input needs.
+
 - Register - The register form successfully created a new user in the database whilst generating a hashed password using Werkzeug.  Redirected to the dashboard upon registration with successful flash message.   Tested form by inputting invalid data, validation checks successful.
 - Login – Tested by logging in using the details of a number of test users.  Password validated successfully using Werkzeug to validate against the hashed passwords.   Redirected to the appropriate dashboard for general user, and the admin dashboard if the username is ‘admin’.    Field data validation checks function as intended when tested with invalid data.    
 - Add activity – Tested the dropdown for ‘assign activity to user’, the select element successfully rendered all registered users to enable easy selection from the list.    Completed all relevant fields adhering to the validation rules, selected date using the date picker, which functions as intended.   Upon submission the admin_dashboard function successfully created a new entry in the ‘activities’ collection and captured the data from the form, accurately updating the database.    Tested the form with invalid data, validation checks work as intended.   
@@ -288,6 +303,15 @@ JSHint also highlighted some warnings that appear to be related to the use of LE
 # Deployment
 
 I decided to deploy this application on Heroku - Cloud Application Platform.  Here are the steps that need to be taken to deploy this repository on Heroku.  I used the gitpod workspace to prepare some of the files for deployment to Heroku.
+
+- Two collections will need to be defined in the MongoDB database.  One for 'users' and another for 'activities'
+
+- An index will need to be created on MongoDB to define the index in order for the search feature to work.  You can enter the following in the terminal to set the index:
+
+```
+mongo.db.activities.create_index([("username", "text"), ("activity_name", "text"), ("activity_description", "text")])
+```
+
 - Create a requirements.txt which includes all dependencies.  The following code can be typed into the terminal to generate one automatically.
 
 ```
@@ -333,6 +357,15 @@ os.environ.setdefault("MONGO_URI", "OBTAIN YOUR PERSONALISED MONGO URI ADDRESS F
 os.environ.setdefault("MONGO_DBNAME", "employee_dashboard")```
 ```
 
+To access the env.py file you'll need to include the following statement under the import statments at the top of app.py.  
+
+```
+if os.path.exists("env.py"):
+    import env
+```
+
+Ensure that you add the env.py file to the gitignore file if using GitPod.
+
 ----
 
 # Credits
@@ -354,5 +387,5 @@ Images acquired from:
 * General Materialize documentation for classes and their behaviour
 * General MongoDB documentation on the use of find, sort and filtering.
 * Python.org was used for PEP8 style guide compliance
-* Stack overflow thread was used for ideas on implementing JavaScript to add days to a date using the addDays function.  It was also used for a suggestion how to check if an URL contains a string using the indexOf function for use in my JavaScript.
+* Stack overflow thread was used for ideas on implementing JavaScript to add days to a date using the addDays function.  It was also used for a suggestion how to check if an URL contains a string using the indexOf function for use in the JavaScript.
 
