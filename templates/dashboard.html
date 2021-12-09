@@ -6,6 +6,25 @@
 
 <!-- RENDER ACTIVITIES ASSIGNED TO USER -->
 
+<div class="row search-container">
+  <form class="col s12 search-form padding-0" action="{{ url_for('user_search') }}" method="POST">
+      <div class="row valign-wrapper center-align relative-search">
+          <div class="input-field col s8 padding-0 input-position">
+              <input type="text" name="query" id="query" minlength="2" class="search-input" required>
+              <label for="query" class="search-label">Search Activities</label>
+          </div>
+          <div class="col s2 padding-0">
+              <button type="submit" class="btn-small text-shadow search-button">
+                  <span class="search-text">Search</span>
+              </button>
+          </div>
+          <div class="col s2 padding-0">
+              <a href="{{ url_for('dashboard') }}" class="btn-small text-shadow reset-button"><span class="reset-text">Reset</span></a>
+          </div>
+      </div>
+  </form>
+</div>
+
 {% if activities|length > 0 %}
 {% for activity in activities %}
 <div class="row">
@@ -27,6 +46,6 @@
 </div>
 {% endfor %}
 {% else %}
-<h5 class="center-align">You currently have no activities assigned</h5>
+<h5 class="center-align">No activities to show</h5>
 {% endif %}
 {% endblock %}

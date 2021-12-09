@@ -171,18 +171,6 @@ def admin_dashboard():
         "admin_dashboard.html", users=users, activities=activities)
 
 
-# Search function
-@app.route("/search", methods=["GET", "POST"])
-def search():
-    """
-    Searches the index based on search form input
-    """
-    query = request.form.get("query")
-    activities = list(mongo.db.activities.find(
-        {"$text": {"$search": query}}).sort("target_date", 1))
-    return render_template("admin_dashboard.html", activities=activities)
-
-
 # Edit activity
 @app.route("/edit_activity/<activity_id>", methods=["GET", "POST"])
 def edit_activity(activity_id):
@@ -295,6 +283,65 @@ def user_activity_history():
     return render_template(
         "user_activity_history.html",
         activities=activities, username=current_user)
+
+
+# Search admin dashboard
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    """
+    Searches the index based on search form input
+    """
+    query = request.form.get("query")
+    activities = list(mongo.db.activities.find(
+        {"$text": {"$search": query}}).sort("target_date", 1))
+    return render_template("admin_dashboard.html", activities=activities)
+
+
+# Search admin activity history
+@app.route("/admin_history_search", methods=["GET", "POST"])
+def admin_history_search():
+    """
+    Searches the index based on search form input
+    """
+    query = request.form.get("query")
+    activities = list(mongo.db.activities.find(
+        {"completed": "yes", "$text": {"$search": query}}).sort(
+            "target_date", 1))
+    return render_template("activity_history.html", activities=activities)
+
+
+# Search user dashboard
+@app.route("/user_search", methods=["GET", "POST"])
+def user_search():
+    """
+    Searches the index based on search form input
+    """
+    current_user = session["user"]
+    username = mongo.db.users.find_one(
+        {"username": current_user})["username"]
+    query = request.form.get("query")
+    activities = list(mongo.db.activities.find(
+        {"username": current_user, "$text": {"$search": query}}).sort(
+            "target_date", 1))
+    return render_template(
+        "dashboard.html", activities=activities, username=username)
+
+
+# Search user activity history
+@app.route("/user_history_search", methods=["GET", "POST"])
+def user_history_search():
+    """
+    Searches the index based on search form input
+    """
+    current_user = session["user"]
+    username = mongo.db.users.find_one(
+        {"username": current_user})["username"]
+    query = request.form.get("query")
+    activities = list(mongo.db.activities.find(
+        {"username": current_user, "completed": "yes", "$text": {
+            "$search": query}}).sort("target_date", 1))
+    return render_template(
+        "user_activity_history.html", activities=activities, username=username)
 
 
 # Other functions
