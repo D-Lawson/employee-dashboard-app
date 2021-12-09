@@ -171,6 +171,18 @@ def admin_dashboard():
         "admin_dashboard.html", users=users, activities=activities)
 
 
+# Search function
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    """
+    Searches the index based on search form input
+    """
+    query = request.form.get("query")
+    activities = list(mongo.db.activities.find(
+        {"$text": {"$search": query}}).sort("target_date", 1))
+    return render_template("admin_dashboard.html", activities=activities)
+
+
 # Edit activity
 @app.route("/edit_activity/<activity_id>", methods=["GET", "POST"])
 def edit_activity(activity_id):
